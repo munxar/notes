@@ -8,7 +8,7 @@
     var note = app.getNote(params.index);
     var form = document.getElementById("form");
     var css = document.getElementById("css");
-    
+
     // set style
     css.href = app.getStyle();
 
@@ -40,8 +40,11 @@
 
     function save() {
         getModel();
-
         app.store();
+
+        // hack to prevent url encoding of form
+        event.preventDefault();
+        window.location = "index.html";
     }
 
 })();
