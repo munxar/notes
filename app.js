@@ -61,7 +61,7 @@ Application.prototype.store = function() {
  */
 Application.prototype.getStyles = function() {
     return [
-        { name: "Balck White Style", href: "styles/default.css" },
+        { name: "Black White Style", href: "styles/default.css" },
         { name: "Colorful Cat", href: "styles/color.css" }
     ];
 };

@@ -1,8 +1,29 @@
 body {
-    background-color: yellow;
+    background-color: #ef572e;
 }
 
+.container {
+	background: #f4f4f4;
+}
+
+.btn {
+  	background: #ef572e;
+  	border: 2px solid #f4f4f4;
+	color: #fff;
+}
+
+.btn:hover{
+	background-color: #ccc;
+}
+
+#filter a {
+	color: #ef572e;
+} 
+
 .active {
-    background-color: aqua;
-    color: orange;
+	background-color: #fff;
+}
+
+.active a {
+    color: #ccc;
 }

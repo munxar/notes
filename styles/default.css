@@ -1,4 +1,38 @@
+body {
+	color: #323131;
+}
+
+button {
+	background: #313232;
+}
+
+a {
+	color: #323131;
+}
+
+.container {
+	background: #f4f4f4;
+}
+
+.btn {
+  	background: #cdcdcd;
+  	border: 2px solid #f4f4f4;
+	color: #333;
+}
+
+.btn:hover{
+	background-color: #333;
+	color: #f4f4f4;
+}
+
+#filter li{
+	border: 1px solid #323131;
+}
 
 .active {
-    background-color: grey;
+    background-color: #000;
+}
+.active a {
+    color: #fff;
+
 }
