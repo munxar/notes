@@ -1,0 +1,8 @@
+body {
+    background-color: yellow;
+}
+
+.active {
+    background-color: aqua;
+    color: orange;
+}
