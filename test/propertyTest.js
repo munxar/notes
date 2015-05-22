@@ -6,17 +6,20 @@ describe("notes.Property", function() {
 
     it("can be a empty property", function () {
         var p = new notes.Property();
+
         expect(p).toBeTruthy();
     });
 
     it("should have init value", function () {
         var p = new notes.Property("default");
+
         expect(p.get()).toBe("default");
     });
 
     it("stores the set value", function () {
         var p = new notes.Property();
         p.set(42);
+
         expect(p.get()).toBe(42);
     });
 
@@ -29,5 +32,26 @@ describe("notes.Property", function() {
         p.set(3.1415);
     });
 
+    it("can have multiple observers", function () {
+        var p = new notes.Property();
+        var v1 = 0, v2 = 0;
+        p.onChanged(function(value) { v1 = value; });
+        p.onChanged(function(value) { v2 = value; });
+        p.set(1);
 
+        expect(v1).toBe(1);
+        expect(v2).toBe(1);
+    });
+
+    it("can remove observes", function () {
+        var p = new notes.Property();
+        var v1 = 0, v2 = 0;
+        var cb = p.onChanged(function(value) { v1 = value; });
+        p.onChanged(function(value) { v2 = value; });
+        p.offChanged(cb);
+        p.set(1);
+
+        expect(v1).toBe(0);
+        expect(v2).toBe(1);
+    });
 });

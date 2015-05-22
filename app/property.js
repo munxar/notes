@@ -41,5 +41,19 @@
         return callback;
     };
 
+    /**
+     * remove onChanged observer
+     * @param callback observer callback to remove
+     * if callback isn't found, silently nothing will happen.
+     */
+    Property.prototype.offChanged = function(callback) {
+        var idx = this._observers.indexOf(callback);
+        if(idx >= 0) {
+            this._observers.splice(idx, 1);
+        }
+    };
+
+    // exports
     exports.Property = Property;
-})(notes = notes || {});
+
+})(notes || {});

@@ -1,0 +1,20 @@
+{
+  "name": "notes",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/munxar/notes",
+  "authors": [
+    "Sascha Aeppli <munxar@gmx.de>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jasmine": "~2.3.4"
+  }
+}
