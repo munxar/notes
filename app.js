@@ -3,6 +3,13 @@
  */
 
 function Application() {
+    // init filters list
+    this.filters = [
+        { name: "finish date" },
+        { name: "creation date" },
+        { name: "importance" }
+    ];
+
     // restore notes
     this.restore();
 }
@@ -86,11 +93,7 @@ Application.prototype.setStyle = function(style) {
  * @returns {*[]}
  */
 Application.prototype.getFilters = function() {
-    return [
-        { name: "finish date" },
-        { name: "creation date" },
-        { name: "importance" }
-    ];
+    return this.filters;
 };
 
 /**
@@ -98,7 +101,7 @@ Application.prototype.getFilters = function() {
  * @returns {number} index
  */
 Application.prototype.getFilter = function() {
-    return window.localStorage.getItem("filter") || 0;
+    return JSON.parse(window.localStorage.getItem("filter")) || 0;
 };
 
 /**
@@ -106,6 +109,20 @@ Application.prototype.getFilter = function() {
  */
 Application.prototype.setFilter = function(filter) {
     window.localStorage.setItem("filter", filter);
+};
+
+/**
+ * get finished state
+ */
+Application.prototype.getShowFinished = function() {
+    return JSON.parse(window.localStorage.getItem("showFinished")) || false;
+};
+
+/**
+ * set show finished state
+ */
+Application.prototype.setShowFinished = function(finished) {
+    window.localStorage.setItem("showFinished", finished);
 };
 
 /**

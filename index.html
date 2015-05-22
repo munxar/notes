@@ -9,15 +9,30 @@
 <body>
     <section class="container">
         <header>
-            <h1>Nodes App</h1>
+            <h1>Notes</h1>
             <a class="btn newnote" href="edit.html">Neue Notiz</a>
+
+            <!-- theme switch -->
             <div class="theme">
                 <label for="styles">Thema</label>
                 <select id="styles"></select>
             </div>
+        </header>
 
-            <ul id="filter"></ul>
-            <ul id="list"></ul>
+        <aside>
+            <!-- filters -->
+            <ul id="filter" class="filter"></ul>
+
+            <!-- finished toggle button -->
+            <ul class="filter">
+                <li id="showFinished"><a href="">Show finished</a></li>
+            </ul>
+        </aside>
+
+        <main>
+            <!-- list if notes -->
+            <ul id="list" class="list"></ul>
+        </main>
     </section>
 
     <script src="app.js"></script>

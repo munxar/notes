@@ -5,10 +5,20 @@
 (function() {
     'use strict';
 
+    // access dom elements that we use
+    var css = document.getElementById("css");
     var list = document.getElementById("list");
     var styles = document.getElementById("styles");
     var filter = document.getElementById("filter");
-    var css = document.getElementById("css");
+    var showFinished = document.getElementById("showFinished");
+
+    // initialize show finished toggle button
+    showFinished.className = app.getShowFinished() ? "active" : "";
+    // on click we toggle the button state and update the button
+    showFinished.onclick = function() {
+        app.setShowFinished(!app.getShowFinished());
+        showFinished.className = app.getShowFinished() ? "active" : "";
+    };
 
     // create list of notes
     app.getNotes().forEach(function(note, index) {
@@ -33,6 +43,7 @@
         css.href = styles.value;
     };
 
+    // generate filters
     app.getFilters().forEach(function(f, index) {
         var li = document.createElement("li");
         li.className = app.getFilter() == index ? "active" : "";
@@ -45,4 +56,6 @@
         li.appendChild(a);
         filter.appendChild(li);
     });
+
+
 })();

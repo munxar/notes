@@ -12,11 +12,11 @@ body {
 	color: #fff;
 }
 
-.btn:hover{
+.btn:hover {
 	background-color: #ccc;
 }
 
-#filter a {
+.filter a {
 	color: #ef572e;
 } 
 

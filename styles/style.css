@@ -1,7 +1,7 @@
 body {
+	font-family: Arial;
 	transition: color 0.5s ease;
 	transition: background 0.5s ease;
-	font-family: Arial;
 }
 
 .container {
@@ -27,18 +27,18 @@ body {
 }
 
 
-#filter {
+.filter {
 	padding: 0;
 	margin: 20px 0;
 }
 
-#filter li {
+.filter li {
 	display: inline-block;
 	padding: 10px;
 	margin: 0 5px;
 	float: left;
 }
 
-#list {
-		clear: both;
+.list {
+	clear: both;
 }
