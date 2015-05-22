@@ -20,16 +20,21 @@ a {
 	color: #333;
 }
 
+#filter li {
+	background: #cdcdcd;
+}
+
+#filter a {
+	text-decoration: none;
+
+}
+
 .btn:hover {
 	background-color: #333;
 	color: #f4f4f4;
 }
 
-.filter li {
-	border: 1px solid #323131;
-}
-
-.active {
+#filter .active {
     background-color: #000;
 }
 
