@@ -3,27 +3,28 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>notes / details</title>
+    <link rel="stylesheet" href="styles/style.css">
     <link id="css" rel="stylesheet" href="styles/default.css">
 </head>
 <body>
-    <form id="form" action="index.html">
+    <form id="form" class="container" action="index.html">
         <div>
-            <label for="name">name</label>
-            <input name="name" id="name" type="text">
+            <label for="name">Name: </label>
+            <input name="name" id="name" type="text" placeholder="Name">
         </div>
 
         <div>
-            <label for="description">description</label>
-            <textarea name="description" id="description"></textarea>
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" placeholder="Description"></textarea>
         </div>
 
         <div>
-            <label for="importance">importance</label>
+            <label for="importance">Importance:</label>
             <input name="importance" id="importance" type="number">
         </div>
 
         <div>
-            <label for="finishDate">Finish Date</label>
+            <label for="finishDate">Finish Date:</label>
             <input name="finishDate" id="finishDate" type="datetime-local">
         </div>
 
