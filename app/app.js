@@ -2,6 +2,7 @@
  * Created by saschaaeppli on 21.05.15.
  */
 
+
 function Application() {
     // init filters list
     this.filters = [
@@ -145,3 +146,4 @@ Application.prototype.getQueryParameters = function() {
 
 //  new app instace
 var app = new Application();
+

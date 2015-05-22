@@ -19,7 +19,7 @@
         app.setShowFinished(!app.getShowFinished());
         showFinished.className = app.getShowFinished() ? "active" : "";
     };
-
+    
     // create list of notes
     app.getNotes().forEach(function(note, index) {
         var li = document.createElement("li");
