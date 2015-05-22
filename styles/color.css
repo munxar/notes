@@ -17,13 +17,26 @@ body {
 }
 
 .filter a {
-	color: #ef572e;
+	color: #323131;
+	text-decoration: none;
 } 
 
-.active {
-	background-color: #fff;
+#filter li {
+	background: #cdcdcd;
+}
+
+#filter li:first-child {
+	border-right: 1px solid #eee;
+}
+
+#filter li:last-child {
+	border-left: 1px solid #eee;
+}
+
+#filter .active {
+	background-color: #ef572e;
 }
 
 .active a {
-    color: #ccc;
+    color: #fff;
 }
