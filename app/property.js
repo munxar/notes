@@ -56,4 +56,4 @@
     // exports
     exports.Property = Property;
 
-})(exports || {});
+})(exports);
