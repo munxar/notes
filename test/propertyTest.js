@@ -2,29 +2,30 @@
  * Created by saschaaeppli on 22.05.15.
  */
 
-describe("notes.Property", function() {
+describe("Property", function() {
+    var Property = exports.Property;
 
     it("can be a empty property", function () {
-        var p = new notes.Property();
+        var p = new Property();
 
         expect(p).toBeTruthy();
     });
 
     it("should have init value", function () {
-        var p = new notes.Property("default");
+        var p = new Property("default");
 
         expect(p.get()).toBe("default");
     });
 
     it("stores the set value", function () {
-        var p = new notes.Property();
+        var p = new Property();
         p.set(42);
 
         expect(p.get()).toBe(42);
     });
 
     it("calls observer after value has changed", function (done) {
-        var p = new notes.Property();
+        var p = new Property();
         p.onChanged(function(value) {
             expect(value).toBe(3.1415);
             done();
@@ -33,7 +34,7 @@ describe("notes.Property", function() {
     });
 
     it("can have multiple observers", function () {
-        var p = new notes.Property();
+        var p = new Property();
         var v1 = 0, v2 = 0;
         p.onChanged(function(value) { v1 = value; });
         p.onChanged(function(value) { v2 = value; });
@@ -44,7 +45,7 @@ describe("notes.Property", function() {
     });
 
     it("can remove observes", function () {
-        var p = new notes.Property();
+        var p = new Property();
         var v1 = 0, v2 = 0;
         var cb = p.onChanged(function(value) { v1 = value; });
         p.onChanged(function(value) { v2 = value; });
