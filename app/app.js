@@ -78,7 +78,7 @@ Application.prototype.getStyles = function() {
  * get style index
  */
 Application.prototype.getStyle = function() {
-    return window.localStorage.getItem("style") || this.getStyles()[0].href;
+    return JSON.parse(window.localStorage.getItem("style")) || this.getStyles()[0].href;
 };
 
 /**

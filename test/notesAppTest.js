@@ -14,7 +14,41 @@ describe("NotesApp", function() {
 
     it("has filters property", function () {
         var app = new NotesApp();
+
         expect(app.filters instanceof Property).toBe(true);
     });
+
+    it("persists filter index", function () {
+        var app = new NotesApp();
+        app.init();
+        app.filterIndex.set(1);
+
+        expect(app.storage.getItem("filterIndex")).toBe("1");
+    });
+
+    it("persists style", function () {
+        var app = new NotesApp();
+        app.init();
+        app.style.set("test");
+
+        expect(app.storage.getItem("style")).toBe('"test"');
+    });
+
+    it("persists showFinished flag", function () {
+        var app = new NotesApp();
+        app.init();
+        app.showFinished.set(false);
+
+        expect(app.storage.getItem("showFinished")).toBe("false");
+    });
+
+    it("persists notes", function () {
+        var app = new NotesApp();
+        app.init();
+        app.notes.set([]);
+
+        expect(app.storage.getItem("notes")).toBe("[]");
+    });
+
 
 });

@@ -14,6 +14,23 @@
 
     var notesApp = new exports.NotesApp(window.localStorage);
 
+    notesApp.getFilters().forEach(function(f, index) {
+        var li = document.createElement("li");
+        notesApp.filterIndex.onChanged(function(value) {
+            li.className = value == index ? "active" : "";
+        });
+        var a = document.createElement("a");
+        a.innerHTML = f.name;
+        a.href = "";
+        a.onclick = function() {
+            notesApp.filterIndex.set(index);
+            event.preventDefault();
+        };
+        li.appendChild(a);
+        filter.appendChild(li);
+    });
+
+    /*
     // listen to filters changes
     notesApp.filters.onChanged(function(filters) {
         while (filter.firstChild) {
@@ -33,6 +50,7 @@
             filter.appendChild(li);
         });
     });
+    */
 
     // install change listener and set class depending on state
     notesApp.showFinished.onChanged(function(show) {
