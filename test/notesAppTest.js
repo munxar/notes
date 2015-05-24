@@ -4,6 +4,7 @@
 
 describe("NotesApp", function() {
     var NotesApp = exports.NotesApp;
+    var Note = exports.Note;
 
     it("creates default MemoryStorage if no storage arg is present", function () {
         var app = new NotesApp();
@@ -43,5 +44,20 @@ describe("NotesApp", function() {
         expect(app.storage.getItem("notes")).toBe("[]");
     });
 
+    it("getNote by index", function () {
+        var notes = [{name: "a"},{name: "a"}];
+        var app = new NotesApp({ getItem: function() { return JSON.stringify(notes); }});
+        app.init();
+        var note = app.getNote(0);
 
+        expect(note.name).toBe("a");
+    });
+
+    it("getNote creates note, if index is undefined", function () {
+        var app = new NotesApp({ getItem: function() { return "[]"; }});
+        app.init();
+        var note = app.getNote();
+
+        expect(note instanceof Note).toBe(true);
+    });
 });

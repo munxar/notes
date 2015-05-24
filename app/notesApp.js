@@ -4,6 +4,7 @@
 
 (function(exports) {
     var Property = exports.Property;
+    var Note = exports.Note;
 
     /**
      * Notes App business logic
@@ -48,6 +49,15 @@
      */
     NotesApp.prototype.getFilters = function() {
         return this.filters;
+    };
+
+    /**
+     * get a node by index or create a new one if index is undefined
+     * @param index index or undefined (no argument)
+     * @return {*|Note}
+     */
+    NotesApp.prototype.getNote = function(index) {
+        return index != undefined ? this.notes.get()[index] : new Note();
     };
 
     /**
