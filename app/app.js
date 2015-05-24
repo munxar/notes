@@ -82,66 +82,11 @@ Application.prototype.getStyle = function() {
 };
 
 /**
- * set style index
- * @param style index
- */
-Application.prototype.setStyle = function(style) {
-    window.localStorage.setItem("style", style);
-};
-
-/**
  * get list filters
  * @returns {*[]}
  */
 Application.prototype.getFilters = function() {
     return this.filters;
-};
-
-/**
- * get curren active filter
- * @returns {number} index
- */
-Application.prototype.getFilter = function() {
-    return JSON.parse(window.localStorage.getItem("filter")) || 0;
-};
-
-/**
- * store current filter index
- */
-Application.prototype.setFilter = function(filter) {
-    window.localStorage.setItem("filter", filter);
-};
-
-/**
- * get finished state
- */
-Application.prototype.getShowFinished = function() {
-    return JSON.parse(window.localStorage.getItem("showFinished")) || false;
-};
-
-/**
- * set show finished state
- */
-Application.prototype.setShowFinished = function(finished) {
-    window.localStorage.setItem("showFinished", finished);
-};
-
-/**
- * location.search to object conversion
- * ?key=val&key2=val2
- */
-Application.prototype.getQueryParameters = function() {
-    // remove ?
-    var query = location.search.substring(1);
-    // split key value pairs
-    var tokens = query.split("&");
-    // make object with key value pairs
-    return tokens.reduce(function(obj, val) {
-        var keyValue = val.split("=");
-        var key = keyValue[0];
-        obj[key] = keyValue[1];
-        return obj;
-    }, {});
 };
 
 //  new app instace

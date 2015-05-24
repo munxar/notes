@@ -1,18 +1,22 @@
 /**
  * Created by saschaaeppli on 21.05.15.
  */
-(function() {
+(function(exports) {
     'use strict';
 
-    var params = app.getQueryParameters();
+    // imports
+    var util = exports.util;
+
+    // convert query string to key/value pair object
+    var params = util.queryParameter(location.search);
     var note = app.getNote(params.index);
-    var form = document.getElementById("form");
-    var css = document.getElementById("css");
+
+    // get elements from dom
+    var elements = util.getElements(document, ["form", "css"]);
 
     // set style
-    css.href = app.getStyle();
-
-    form.onsubmit = save;
+    elements.css.href = app.getStyle();
+    elements.form.onsubmit = save;
 
     if(!note) {
         note = app.createNote();
@@ -47,4 +51,4 @@
         window.location = "index.html";
     }
 
-})();
+})(exports);

@@ -33,7 +33,7 @@
 
     /**
      * install a on changed handler on the property.
-     * the callback will be called whenever the value hs changed.
+     * the callback will be called whenever the value has changed.
      * @param callback observer of type function(value) {}
      */
     Property.prototype.onChanged = function(callback) {
