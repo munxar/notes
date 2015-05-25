@@ -10,7 +10,7 @@
     <form id="form" class="container" action="index.html">
         <div>
             <label for="name">Name: </label><br>
-            <input name="name" id="name" type="text" placeholder="Name">
+            <input name="name" id="name" type="text" placeholder="Name" autofocus>
         </div>
 
         <div>
@@ -31,7 +31,13 @@
         <a class="second btn" href="index.html">Abbrechen</a>
     </form>
 
-    <script src="app/app.js"></script>
+    <script>var exports = {}</script>
+    <script src="app/util.js"></script>
+    <script src="app/storage.js"></script>
+    <script src="app/property.js"></script>
+    <script src="app/note.js"></script>
+    <script src="app/notesApp.js"></script>
+
     <script src="edit.js"></script>
 </body>
 </html>

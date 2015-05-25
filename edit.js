@@ -1,22 +1,28 @@
 /**
  * Created by saschaaeppli on 21.05.15.
  */
-(function() {
+(function(exports) {
     'use strict';
 
-    var params = app.getQueryParameters();
+    // imports
+    var util = exports.util;
+    var NotesApp = exports.NotesApp;
+
+    // create app
+    var app = new NotesApp(window.localStorage);
+    // initialize properties
+    app.init();
+
+    // convert query string to key/value pair object
+    var params = util.queryParameter(location.search);
     var note = app.getNote(params.index);
-    var form = document.getElementById("form");
-    var css = document.getElementById("css");
+
+    // get elements from dom
+    var elements = util.getElements(document, ["form", "css"]);
 
     // set style
-    css.href = app.getStyle();
-
-    form.onsubmit = save;
-
-    if(!note) {
-        note = app.createNote();
-    }
+    elements.css.href = app.style.get();
+    elements.form.onsubmit = save;
 
     setModel(note);
 
@@ -40,11 +46,12 @@
 
     function save() {
         getModel();
-        app.store();
+        //app.store();
 
         // hack to prevent url encoding of form
         event.preventDefault();
         window.location = "index.html";
     }
 
-})();
+    app.init();
+})(exports);
