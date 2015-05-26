@@ -10,8 +10,8 @@
 
     // create app
     var app = new NotesApp(window.localStorage);
-    // initialize properties
-    app.init();
+    // load data
+    app.restore();
 
     // convert query string to key/value pair object
     var params = util.queryParameter(location.search);
@@ -30,7 +30,7 @@
         for(var attr in note) {
             var input = document.getElementById(attr);
             if(input) {
-                input.value = note[attr];
+                input.value = note[attr].get();
             }
         }
     }
@@ -39,19 +39,21 @@
         for(var attr in note) {
             var input = document.getElementById(attr);
             if(input) {
-                note[attr] = input.value;
+                note[attr].set(input.value);
             }
         }
     }
 
     function save() {
         getModel();
-        //app.store();
+        app.addNote(note);
+
+        // save
+        app.store();
 
         // hack to prevent url encoding of form
         event.preventDefault();
         window.location = "index.html";
     }
 
-    app.init();
 })(exports);

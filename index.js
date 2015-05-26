@@ -27,6 +27,7 @@
         // install click handler to change current filter
         a.onclick = function() {
             notesApp.filterIndex.set(index);
+            notesApp.store();
             event.preventDefault();
         };
         li.appendChild(a);
@@ -41,6 +42,8 @@
     // on click we toggle showFinished flag
     elements.showFinished.onclick = function() {
         notesApp.showFinished.set(!notesApp.showFinished.get());
+        notesApp.store();
+
         // prevent default, so anchor doesn't navigate
         event.preventDefault();
     };
@@ -74,9 +77,10 @@
     // on change set style
     elements.styles.onchange = function() {
         notesApp.style.set(elements.styles.value);
+        notesApp.store();
     };
 
     // init application
-    notesApp.init();
+    notesApp.restore();
 
 })(exports);

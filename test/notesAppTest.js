@@ -12,52 +12,55 @@ describe("NotesApp", function() {
         expect(app.storage instanceof exports.MemoryStorage).toBe(true);
     });
 
-    it("persists filter index", function () {
+    it("auto persists filter index", function () {
         var app = new NotesApp();
-        app.init();
         app.filterIndex.set(1);
+        app.store();
 
         expect(app.storage.getItem("filterIndex")).toBe("1");
     });
 
-    it("persists style", function () {
+    it("auto persists style", function () {
         var app = new NotesApp();
-        app.init();
         app.style.set("test");
+        app.store();
 
         expect(app.storage.getItem("style")).toBe('"test"');
     });
 
-    it("persists showFinished flag", function () {
+    it("auto persists showFinished flag", function () {
         var app = new NotesApp();
-        app.init();
         app.showFinished.set(false);
+        app.store();
 
         expect(app.storage.getItem("showFinished")).toBe("false");
     });
 
-    it("persists notes", function () {
-        var app = new NotesApp();
-        app.init();
-        app.notes.set([]);
-
-        expect(app.storage.getItem("notes")).toBe("[]");
-    });
-
     it("getNote by index", function () {
-        var notes = [{name: "a"},{name: "a"}];
-        var app = new NotesApp({ getItem: function() { return JSON.stringify(notes); }});
-        app.init();
+        var app = new NotesApp();
+        var note1 = new Note();
+        var note2 = new Note();
+        app.notes.get().push(note1);
+        app.notes.get().push(note2);
+
         var note = app.getNote(0);
 
-        expect(note.name).toBe("a");
+        expect(note).toBe(note1);
     });
 
     it("getNote creates note, if index is undefined", function () {
         var app = new NotesApp({ getItem: function() { return "[]"; }});
-        app.init();
         var note = app.getNote();
 
         expect(note instanceof Note).toBe(true);
     });
+
+    it("createNote appends note to notes array", function () {
+        var app = new NotesApp();
+        var note = new Note();
+        app.addNote(note);
+
+        expect(app.notes.get()).toEqual([note]);
+    });
+
 });

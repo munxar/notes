@@ -17,12 +17,6 @@
         // set or initialize default storage
         this.storage = storage || new exports.MemoryStorage;
 
-        // create properties
-        this.filterIndex = new Property();
-        this.showFinished = new Property();
-        this.notes = new Property();
-        this.style = new Property();
-
         // initialize variables
         this.styles = [
             { name: "Black White Style", href: "styles/default.css" },
@@ -33,6 +27,11 @@
             { name: "creation date" },
             { name: "importance" }
         ];
+        // init properties
+        this.notes = new Property([]);
+        this.filterIndex = new Property(0);
+        this.showFinished = new Property(false);
+        this.style = new Property(this.styles[0].href);
     }
 
     /**
@@ -61,33 +60,38 @@
     };
 
     /**
-     * persists a property in the storage on change
-     * @param key in the storage
-     * @param property property
-     * @param init initial value if not present in storage
+     * append a new note and persist
+     * @param note
+     * @return {*|Note}
      */
-    NotesApp.prototype.persist = function(key, property, init) {
-        var storage = this.storage;
-        // try to get item from storage, or set default and parse value
-        var value = JSON.parse(storage.getItem(key) || JSON.stringify(init));
-
-        // initialize property
-        property.set(value);
-
-        // persist value on change
-        property.onChanged(function(value) {
-            storage.setItem(key, JSON.stringify(value));
-        });
+    NotesApp.prototype.addNote = function(note) {
+        // get notes
+        var notes = this.notes.get();
+        // append new note
+        notes.push(note);
     };
 
     /**
-     * initialize all properties to their defaults
+     *
      */
-    NotesApp.prototype.init = function() {
-        this.persist("filterIndex", this.filterIndex, 0);
-        this.persist("showFinished", this.showFinished, false);
-        this.persist("notes", this.notes, []);
-        this.persist("style", this.style, this.getStyles()[0].href)
+    NotesApp.prototype.store = function() {
+        var storage = this.storage;
+
+        storage.setItem("filterIndex", JSON.stringify(this.filterIndex.get()));
+        storage.setItem("showFinished", JSON.stringify(this.showFinished.get()));
+        storage.setItem("style", JSON.stringify(this.style.get()));
+        storage.setItem("notes", JSON.stringify(this.notes.get()));
+    };
+
+    NotesApp.prototype.restore = function() {
+        var storage = this.storage;
+
+        this.filterIndex.set(JSON.parse(storage.getItem("filterIndex")) || this.filterIndex.get());
+        this.showFinished.set(JSON.parse(storage.getItem("showFinished")) || this.showFinished.get());
+        this.style.set(JSON.parse(storage.getItem("style")) || this.style.get());
+
+        var notes = JSON.parse(storage.getItem("notes") || JSON.stringify(this.notes.get()));
+        this.notes.set(notes.map(function(note) { return new Note(note); }));
     };
 
     // exports
