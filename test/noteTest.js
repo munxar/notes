@@ -8,7 +8,7 @@ describe("Note", function() {
     it("has name with default 'New Note'", function () {
         var note = new Note();
 
-        expect(note.name).toBe("New Note");
+        expect(note.name.get()).toBe("");
     });
 
     it("has done property with default false", function () {
@@ -20,25 +20,31 @@ describe("Note", function() {
     it("has creationDate", function () {
         var note = new Note();
 
-        expect(note.creationDate instanceof Date).toBe(true);
+        expect(note.creationDate.get() instanceof Date).toBe(true);
     });
 
     it("has finishedDate", function () {
         var note = new Note();
 
-        expect(note.finishDate instanceof Date).toBe(true);
+        expect(note.finishDate.get() instanceof Date).toBe(true);
     });
 
     it("has description with default ''", function () {
         var note = new Note();
 
-        expect(note.description).toBe("");
+        expect(note.description.get()).toBe("");
     });
 
     it("has importance with default 0", function () {
         var note = new Note();
 
-        expect(note.importance).toBe(0);
+        expect(note.importance.get()).toBe(0);
+    });
+
+    it("has finished with default false", function () {
+        var note = new Note();
+
+        expect(note.finished.get()).toBe(false);
     });
 
     it("create Note from json", function () {
@@ -46,12 +52,12 @@ describe("Note", function() {
         var date2 = new Date();
         var note = new Note({ name: "one", done: true, creationDate: date1, finishDate: date2, description: "hallo", importance: 42 });
 
-        expect(note.name).toBe("one");
-        expect(note.description).toBe("hallo");
+        expect(note.name.get()).toBe("one");
+        expect(note.description.get()).toBe("hallo");
         expect(note.done.get()).toBe(true);
-        expect(note.creationDate).toBe(date1);
-        expect(note.finishDate).toBe(date2);
-        expect(note.importance).toBe(42);
+        expect(note.creationDate.get()).toBe(date1);
+        expect(note.finishDate.get()).toBe(date2);
+        expect(note.importance.get()).toBe(42);
     });
 
 });

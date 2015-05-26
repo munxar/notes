@@ -15,7 +15,8 @@
         args = args || {};
 
         this.done = new Property(args.done || false);
-        this.name = new Property(args.name || "New Note");
+        this.name = new Property(args.name || "");
+        this.finished = new Property(args.finished || false);
         this.creationDate = new Property(args.creationDate || new Date());
         this.finishDate = new Property(args.finishDate || new Date());
         this.description = new Property(args.description || "");

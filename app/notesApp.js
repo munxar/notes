@@ -29,10 +29,27 @@
         ];
         // init properties
         this.notes = new Property([]);
+        this.filteredNotes = new Property([]);
         this.filterIndex = new Property(0);
         this.showFinished = new Property(false);
         this.style = new Property(this.styles[0].href);
+
+        // apply filter
+        this.showFinished.onChanged(this.filter.bind(this));
+        this.notes.onChanged(this.filter.bind(this));
     }
+
+    /**
+     * filter the notes and set result to filteredNotes property
+     */
+    NotesApp.prototype.filter = function() {
+        var app = this;
+        var notes = this.notes.get();
+        var filteredNotes = notes.filter(function(note) {
+            return app.showFinished.get() ? true : !note.finished.get();
+        });
+        this.filteredNotes.set(filteredNotes);
+    };
 
     /**
      * get available styles
@@ -51,24 +68,24 @@
     };
 
     /**
-     * get a node by index or create a new one if index is undefined
-     * @param index index or undefined (no argument)
+     * get a node by index
+     * @param index index
      * @return {*|Note}
      */
     NotesApp.prototype.getNote = function(index) {
-        return index != undefined ? this.notes.get()[index] : new Note();
+        return this.notes.get()[index];
     };
 
+
     /**
-     * append a new note and persist
-     * @param note
+     * append a new note and adds it to the notes array
      * @return {*|Note}
      */
-    NotesApp.prototype.addNote = function(note) {
-        // get notes
-        var notes = this.notes.get();
-        // append new note
-        notes.push(note);
+    NotesApp.prototype.createNote = function() {
+        // create new note
+        var note = new Note();
+        this.notes.get().push(note);
+        return note;
     };
 
     /**
@@ -85,13 +102,15 @@
 
     NotesApp.prototype.restore = function() {
         var storage = this.storage;
+        var app = this;
 
         this.filterIndex.set(JSON.parse(storage.getItem("filterIndex")) || this.filterIndex.get());
         this.showFinished.set(JSON.parse(storage.getItem("showFinished")) || this.showFinished.get());
         this.style.set(JSON.parse(storage.getItem("style")) || this.style.get());
 
-        var notes = JSON.parse(storage.getItem("notes") || JSON.stringify(this.notes.get()));
-        this.notes.set(notes.map(function(note) { return new Note(note); }));
+        var notes = JSON.parse(storage.getItem("notes") || JSON.stringify(this.notes.get()))
+            .map(function(note) { return new Note(note); });
+        this.notes.set(notes);
     };
 
     // exports

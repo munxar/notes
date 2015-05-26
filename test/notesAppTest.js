@@ -48,19 +48,26 @@ describe("NotesApp", function() {
         expect(note).toBe(note1);
     });
 
-    it("getNote creates note, if index is undefined", function () {
-        var app = new NotesApp({ getItem: function() { return "[]"; }});
-        var note = app.getNote();
-
-        expect(note instanceof Note).toBe(true);
-    });
-
-    it("createNote appends note to notes array", function () {
+    it("createNote creates note, and adds it to the nots arra", function () {
         var app = new NotesApp();
-        var note = new Note();
-        app.addNote(note);
-
+        var note = app.createNote();
         expect(app.notes.get()).toEqual([note]);
     });
 
+    it("getNote returns undefined if index doesn't exist", function () {
+        var app = new NotesApp();
+        var note = app.getNote(1);
+
+        expect(note).toEqual(undefined);
+    });
+
+    it("has filtered notes", function () {
+        var app = new NotesApp();
+        var note1 = app.createNote();
+        var note2 = app.createNote();
+        note1.finished.set(true);
+        app.filter();
+
+        expect(app.filteredNotes.get()).toEqual([note2]);
+    });
 });

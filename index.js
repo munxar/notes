@@ -49,13 +49,32 @@
     };
 
     // render notes
-    notesApp.notes.onChanged(function(notes) {
+    notesApp.filteredNotes.onChanged(function(notes) {
         // empty list
         util.removeChildren(elements.list);
 
         notes.forEach(function(note, index) {
             var li = document.createElement("li");
-            li.innerHTML = "<span>"+note.name+"</span><a href='edit.html?index=" + index + "'>bearbeiten</a>";
+
+            var finished = document.createElement("input");
+            finished.type = "checkbox";
+            finished.checked = note.finished.get();
+            finished.onchange = function() {
+                note.finished.set(this.checked);
+                notesApp.store();
+            };
+
+            var name = document.createElement("span");
+            name.innerHTML = note.name.get();
+
+            var edit = document.createElement("a");
+            edit.href= "edit.html?index=" + index;
+            edit.innerHTML = "bearbeiten";
+
+            li.appendChild(finished);
+            li.appendChild(name);
+            li.appendChild(edit);
+
             elements.list.appendChild(li);
         });
     });
