@@ -1,3 +1,9 @@
+/*
+	Notes
+	Layout Stylesheet only
+	Colors are in default.css or color.css
+*/
+
 body {
 	font-family: Arial;
 	padding: 0;
@@ -13,12 +19,23 @@ body {
 	padding: 20px;
 }
 
+main {
+	clear: both;
+	overflow: hidden;
+}
+
 .theme {
 	float: right;
 }
 
+select {
+	height: 30px;
+	width: 120px;
+	background-color: #fff;
+}
+
 .btn {
-	width: 150px;
+	width: 200px;
 	text-align: center;
   	display:block;
   	font-size: 16px;
@@ -28,6 +45,10 @@ body {
   	text-decoration: none;
 }
 
+.second {
+	width: 176px;
+	margin-top: 15px;
+}
 
 .filter {
 	padding: 0;
@@ -38,28 +59,126 @@ body {
 	display: inline-block;
 	padding: 10px;
 	margin: 0 5px;
-	float: left;
 	text-align: center;
 }
 
 .list {
+	margin: 10px 0;
+	padding: 0;
 	clear: both;
 }
 
-@media only screen and (max-width : 480px) {
-	body {
+.list li {
+	margin: 7px 0;
+	width: 100%;
+	list-style: none;
+	float: left;
+}
 
-	}
+#filter {
+	float: left;
+}
+
+.list ul:after {
+	clear: both;
+}
+
+.list span {
+	width: 70%;
+	display: block;
+	float: left;
+	text-transform: uppercase;
+	position: relative;
+	padding-left: 20px;
+}
+/* saved for later work
+.list span:before {
+    content: "\f00c";
+    font-family: FontAwesome;
+    color: #666;
+    font-size: 20px;
+    padding-right: 0.5em;
+}
+*/
+.list a {
+	width: 20%;
+	float: right;
+	text-align: center;
+	text-decoration: none;
+}
+
+.list span, .list a {
+	padding: 10px;
+}
+
+.list a, .filter a {
+	text-decoration: none;
+	line-height: 21px; /* fix for same height as .list span element */
+}
+
+#showFinished {
+	float: right;
+}
+
+input {
+	height: 15px;
+}
+
+
+input, textarea {
+	padding: 8px;
+	margin: 8px 0;
+	width: 40%;
+	font-size: 16px;
+}
+
+
+::-webkit-input-placeholder {
+	color: #fff;
+}
+
+/* Mobile View */
+@media only screen and (max-width : 480px) {
+
 	.container {
 		width: 90%;
 	}
+
 	.btn {
 		width: 94%;
+		margin: 5px 0;
+	}
+
+	button {
+		width: 100% !important; /* Button width */
 	}
 
 	.filter li {
-		width: 31.3333%;
-		padding: 10px 0.8%;
+		padding: 7px 0.8%;
 		margin: 0;
+		width: 31.3333%;
+	}
+
+	#showFinished {
+		float: left;
+	}
+
+	label {
+		display: none;
+	}
+
+	input {
+		height: 15px;
+	}
+
+	::-webkit-input-placeholder {
+		color: #323131;
+	}
+
+	input, textarea {
+		padding: 5px;
+		margin: 3px 0;
+		width: 96%;
+		font-size: 16px;
 	}
 }

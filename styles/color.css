@@ -12,25 +12,36 @@ body {
 	color: #fff;
 }
 
-.btn:hover {
+.second {
+	background-color: #666;	
+}
+
+.btn:hover, .second:hover {
 	background-color: #ccc;
 }
 
-.filter a {
+.filter a, .list a {
 	color: #323131;
-	text-decoration: none;
 } 
+
+.list span, .list a {
+	background: #fff;
+}
+
+.list span {
+	color: #ef572e;
+}
 
 #filter li {
 	background: #cdcdcd;
 }
 
 #filter li:first-child {
-	border-right: 1px solid #eee;
+	border-right: 1px solid #f4f4f4;
 }
 
 #filter li:last-child {
-	border-left: 1px solid #eee;
+	border-left: 1px solid #f4f4f4;
 }
 
 #filter .active {
