@@ -62,6 +62,7 @@
             finished.onchange = function() {
                 note.finished.set(this.checked);
                 notesApp.store();
+                notesApp.filter();
             };
 
             var name = document.createElement("span");
