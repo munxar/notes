@@ -68,12 +68,28 @@
             var name = document.createElement("span");
             name.innerHTML = note.name.get();
 
+            var description = document.createElement("span");
+            description.innerHTML = note.description.get();
+
+            var importance = document.createElement("span");
+            importance.innerHTML = note.importance.get();
+
             var edit = document.createElement("a");
             edit.href= "edit.html?index=" + index;
             edit.innerHTML = "bearbeiten";
 
+            var creationDate = document.createElement("span");
+            creationDate.innerHTML = note.creationDate.get();
+
+            var finishDate = document.createElement("span");
+            finishDate.innerHTML = note.finishDate.get();
+
             li.appendChild(finished);
             li.appendChild(name);
+            li.appendChild(description);
+            li.appendChild(importance);
+            li.appendChild(creationDate);
+            li.appendChild(finishDate);
             li.appendChild(edit);
 
             elements.list.appendChild(li);

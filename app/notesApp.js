@@ -37,6 +37,7 @@
         // apply filter
         this.showFinished.onChanged(this.filter.bind(this));
         this.notes.onChanged(this.filter.bind(this));
+        this.filterIndex.onChanged(this.filter.bind(this));
     }
 
     /**
@@ -45,10 +46,32 @@
     NotesApp.prototype.filter = function() {
         var app = this;
         var notes = this.notes.get();
+
+        // filtering
         var filteredNotes = notes.filter(function(note) {
             return app.showFinished.get() ? true : !note.finished.get();
         });
-        this.filteredNotes.set(filteredNotes);
+
+        // sorting
+        var sortFn = this.getSortFunction();
+        var sortedAndFilteredNotes = filteredNotes.sort(sortFn);
+
+        this.filteredNotes.set(sortedAndFilteredNotes);
+    };
+
+    /**
+     * returns a sort function depending on filterIndex
+     * 0: finish date
+     * 1: creation date
+     * 2: importance
+     * @returns {*}
+     */
+    NotesApp.prototype.getSortFunction = function() {
+        return {
+            0: function(a, b) { return new Date(b.finishDate.get()) - new Date(a.finishDate.get()); },
+            1: function(a, b) { return new Date(b.creationDate.get()) - new Date(a.creationDate.get());},
+            2: function(a, b) { return b.importance.get() - a.importance.get(); }
+        }[this.filterIndex.get()];
     };
 
     /**
