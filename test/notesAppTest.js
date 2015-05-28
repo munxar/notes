@@ -43,7 +43,7 @@ describe("NotesApp", function() {
         app.notes.get().push(note1);
         app.notes.get().push(note2);
 
-        var note = app.getNote(note1.id);
+        var note = app.getNote(note1.id.get());
 
         expect(note).toBe(note1);
     });
