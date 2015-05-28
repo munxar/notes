@@ -91,12 +91,12 @@
     };
 
     /**
-     * get a node by index
-     * @param index index
+     * get a node by id
+     * @param id note id
      * @return {*|Note}
      */
-    NotesApp.prototype.getNote = function(index) {
-        return this.notes.get()[index];
+    NotesApp.prototype.getNote = function(id) {
+        return this.notes.get().filter(function(note) { return note.id.get() === id; })[0];
     };
 
 
@@ -125,7 +125,6 @@
 
     NotesApp.prototype.restore = function() {
         var storage = this.storage;
-        var app = this;
 
         this.filterIndex.set(JSON.parse(storage.getItem("filterIndex")) || this.filterIndex.get());
         this.showFinished.set(JSON.parse(storage.getItem("showFinished")) || this.showFinished.get());

@@ -6,7 +6,6 @@
 
     // imports
     var util = exports.util;
-    var Note = exports.Note;
     var NotesApp = exports.NotesApp;
 
     // create app
@@ -17,7 +16,7 @@
     // convert query string to key/value pair object
     var params = util.queryParameter(location.search);
     // get the note
-    var note = params.index != undefined ? app.getNote(params.index) : app.createNote();
+    var note = params.id != undefined ? app.getNote(params.id) : app.createNote();
 
     // get elements from dom
     var elements = util.getElements(document, ["form", "css"]);

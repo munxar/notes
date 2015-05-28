@@ -56,6 +56,14 @@
         }
     };
 
+    /**
+     * generate a random string
+     * @returns {string}
+     */
+    util.genId = function() {
+        return Math.random().toString(36).split(".").join("");
+    };
+
     // exports
     exports.util = util;
 })(exports);

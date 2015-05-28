@@ -6,6 +6,7 @@
 
     // imports
     var Property = exports.Property;
+    var util = exports.util;
 
     /**
      * Note class
@@ -14,6 +15,7 @@
     function Note(args) {
         args = args || {};
 
+        this.id = new Property(args.id || util.genId());
         this.done = new Property(args.done || false);
         this.name = new Property(args.name || "");
         this.finished = new Property(args.finished || false);

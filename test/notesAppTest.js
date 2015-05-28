@@ -36,14 +36,14 @@ describe("NotesApp", function() {
         expect(app.storage.getItem("showFinished")).toBe("false");
     });
 
-    it("getNote by index", function () {
+    it("getNote by id", function () {
         var app = new NotesApp();
         var note1 = new Note();
         var note2 = new Note();
         app.notes.get().push(note1);
         app.notes.get().push(note2);
 
-        var note = app.getNote(0);
+        var note = app.getNote(note1.id);
 
         expect(note).toBe(note1);
     });

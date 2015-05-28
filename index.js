@@ -53,7 +53,7 @@
         // empty list
         util.removeChildren(elements.list);
 
-        notes.forEach(function(note, index) {
+        notes.forEach(function(note) {
             var li = document.createElement("li");
 
             var finished = document.createElement("input");
@@ -75,7 +75,7 @@
             importance.innerHTML = note.importance.get();
 
             var edit = document.createElement("a");
-            edit.href= "edit.html?index=" + index;
+            edit.href= "edit.html?id=" + note.id.get();
             edit.innerHTML = "bearbeiten";
 
             var creationDate = document.createElement("span");
