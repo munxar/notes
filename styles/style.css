@@ -4,12 +4,18 @@
 	Colors are in default.css or color.css
 */
 
+	/* [1] transition: 
+	** This line is global for all stylesheets,
+	** color declerations are in the theme css
+	*/
+
+
 body {
 	font-family: Arial, sans-serif;
 	padding: 0;
 	margin: 0;
-	transition: color 0.5s ease;
-	transition: background 0.5s ease;
+	transition: color 0.5s ease;		/* [1] */
+	transition: background 0.5s ease;	/* [1] */
 }
 
 .container {
