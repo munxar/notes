@@ -31,7 +31,7 @@
         for(var attr in note) {
             var input = document.getElementById(attr);
             if(input) {
-                input.value = note[attr].get();
+                input.value = note[attr];
             }
         }
     }
@@ -40,7 +40,7 @@
         for(var attr in note) {
             var input = document.getElementById(attr);
             if(input) {
-                note[attr].set(input.value);
+                note[attr] = input.value;
             }
         }
     }

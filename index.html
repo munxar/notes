@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <link rel="stylesheet" href="styles/style.css">
     <link id="css" rel="stylesheet" href="styles/default.css">
+    <!--
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    -->
 </head>
 <body>
     <section class="container">
         <header>
             <!-- theme switch -->
-            <div class="theme">
+            <div id="theme" class="theme">
                 <label for="styles">Thema</label>
-                <select id="styles"></select>
+                <select id="styles">
+                </select>
             </div>
 
             <h1>Notes</h1>
@@ -23,7 +26,8 @@
 
         <aside>
             <!-- filters -->
-            <ul id="filter" class="filter"></ul>
+            <ul id="filter" class="filter">
+            </ul>
 
             <!-- finished toggle button -->
             <ul class="filter">
@@ -31,11 +35,41 @@
             </ul>
         </aside>
 
-        <main>
+        <main id="main">
             <!-- list if notes -->
-            <ul id="list" class="list"></ul>
+            <ul id="list" class="list">
+            </ul>
         </main>
     </section>
+
+    <!-- TEMPLATES -->
+    <script id="listTemplate" type="text/x-handlebars-template">
+        {{#each this}}
+        <li>
+            <input type="checkbox" {{checked finished}} data-id="{{id}}">
+            <span>{{name}}</span>
+            <span>{{description}}</span>
+            <span>{{importance}}</span>
+            <a href="edit.html?id={{id}}">bearbeiten</a>
+        </li>
+        {{/each}}
+    </script>
+
+    <script id="styleTemplate" type="text/x-handlebars-template">
+        <!-- style options -->
+        {{#each this}}
+        <option value="{{href}}">{{name}}</option>
+        {{/each}}
+    </script>
+
+    <script id="filterTemplate" type="text/x-handlebars-template">
+        {{#each filters}}
+        <li class="{{isActive @index ../filterIndex}}" ><a href="#" data-index="{{@index}}">{{name}}</a></li>
+        {{/each}}
+    </script>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/handlebars/handlebars.js"></script>
 
     <script>var exports = {}</script>
     <script src="app/util.js"></script>
@@ -44,8 +78,6 @@
     <script src="app/note.js"></script>
     <script src="app/notesApp.js"></script>
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/handlebars/handlebars.js"></script>
     <script src="index.js"></script>
 </body>
 </html>

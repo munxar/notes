@@ -43,7 +43,7 @@ describe("NotesApp", function() {
         app.notes.get().push(note1);
         app.notes.get().push(note2);
 
-        var note = app.getNote(note1.id.get());
+        var note = app.getNote(note1.id);
 
         expect(note).toBe(note1);
     });
@@ -65,7 +65,7 @@ describe("NotesApp", function() {
         var app = new NotesApp();
         var note1 = app.createNote();
         var note2 = app.createNote();
-        note1.finished.set(true);
+        note1.finished = true;
         app.filter();
 
         expect(app.filteredNotes.get()).toEqual([note2]);

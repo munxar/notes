@@ -2,121 +2,94 @@
  * Created by saschaaeppli on 21.05.15.
  */
 
-(function(exports) {
+$(function() {
     'use strict';
-
-    // imports
-    var util = exports.util;
+    // helper to set class 'active' if index is eql filterIndex
+    Handlebars.registerHelper('isActive', function(index, filterIndex) {
+        return index == filterIndex ? "active" : "";
+    });
+    // helper to set checked attribute in input element, based on a flag
+    Handlebars.registerHelper('checked', function(flag) {
+        return flag ? "checked" : "";
+    });
 
     // get dom elements that we use
-    var elements = util.getElements(document, ["css", "list", "styles", "filter", "showFinished"]);
+    var css = $("#css");
+    var styles = $("#styles");
+    var filterList = $("#filter");
+    var showFinished = $("#showFinished");
+    var list = $("#list");
+
+    // get and compile handlebars templates
+    var template = Handlebars.compile($("#listTemplate").html());
+    var styleTemplate = Handlebars.compile($("#styleTemplate").html());
+    var filterTemplate = Handlebars.compile($("#filterTemplate").html());
 
     // create a notes app
-    var notesApp = new exports.NotesApp(window.localStorage);
+    var app = new exports.NotesApp(window.localStorage);
 
-    // create filters
-    notesApp.getFilters().forEach(function(f, index) {
-        var li = document.createElement("li");
-        // if filter index changes, update active class
-        notesApp.filterIndex.onChanged(function(value) {
-            li.className = value == index ? "active" : "";
-        });
-        var a = document.createElement("a");
-        a.innerHTML = f.name;
-        a.href = "";
-        // install click handler to change current filter
-        a.onclick = function() {
-            notesApp.filterIndex.set(index);
-            notesApp.store();
-            event.preventDefault();
-        };
-        li.appendChild(a);
-        elements.filter.appendChild(li);
+    // render filters if model changes
+    app.filters.onChanged(function(filters) {
+        var data = { filters: filters, filterIndex: app.filterIndex.get() };
+        filterList.html(filterTemplate(data));
     });
 
-    // install change listener and set class depending on state
-    notesApp.showFinished.onChanged(function(show) {
-        elements.showFinished.className = show ? "active" : "";
+    // set filterIndex if filter item is clicked
+    filterList.on("click", "a", function(event) {
+        var index = $(event.target).data("index");
+        app.filterIndex.set(index);
     });
 
-    // on click we toggle showFinished flag
-    elements.showFinished.onclick = function() {
-        notesApp.showFinished.set(!notesApp.showFinished.get());
-        notesApp.store();
+    // if note finished input changes, set model and update list
+    list.on("change", "input", function(event) {
+        var target = $(event.target);
+        // get note by id
+        var note = app.getNote(target.data("id"));
+        // set to finished
+        note.finished = target.prop("checked");
+        // save changes
+        app.store();
+        // update list
+        app.filter();
+    });
 
+    // iof show finished state changes, change class
+    app.showFinished.onChanged(function(show) {
+        showFinished.toggleClass("active", show);
+    });
+
+    // toggle state and save, if showFinished button is clicked
+    showFinished.click(function() {
+        app.showFinished.set(!app.showFinished.get());
+        app.store();
         // prevent default, so anchor doesn't navigate
         event.preventDefault();
-    };
-
-    // render notes
-    notesApp.filteredNotes.onChanged(function(notes) {
-        // empty list
-        util.removeChildren(elements.list);
-
-        notes.forEach(function(note) {
-            var li = document.createElement("li");
-
-            var finished = document.createElement("input");
-            finished.type = "checkbox";
-            finished.checked = note.finished.get();
-            finished.onchange = function() {
-                note.finished.set(this.checked);
-                notesApp.store();
-                notesApp.filter();
-            };
-
-            var name = document.createElement("span");
-            name.innerHTML = note.name.get();
-
-            var description = document.createElement("span");
-            description.innerHTML = note.description.get();
-
-            var importance = document.createElement("span");
-            importance.innerHTML = note.importance.get();
-
-            var edit = document.createElement("a");
-            edit.href= "edit.html?id=" + note.id.get();
-            edit.innerHTML = "bearbeiten";
-
-            var creationDate = document.createElement("span");
-            creationDate.innerHTML = note.creationDate.get();
-
-            var finishDate = document.createElement("span");
-            finishDate.innerHTML = note.finishDate.get();
-
-            li.appendChild(finished);
-            li.appendChild(name);
-            li.appendChild(description);
-            li.appendChild(importance);
-            li.appendChild(creationDate);
-            li.appendChild(finishDate);
-            li.appendChild(edit);
-
-            elements.list.appendChild(li);
-        });
     });
 
-    // create styles list
-    notesApp.getStyles().forEach(function(style) {
-        var option = document.createElement("option");
-        option.innerHTML = style.name;
-        option.value = style.href;
-        elements.styles.appendChild(option);
+    // render notes if model changes
+    app.filteredNotes.onChanged(function(notes) {
+        list.html(template(notes));
+    });
+
+    // render options if model changes
+    app.styles.onChanged(function(s) {
+        styles.html(styleTemplate(s));
     });
 
     // bind style to select value
-    notesApp.style.onChanged(function(style) {
-        elements.styles.value = style;
-        elements.css.href = style;
+    app.style.onChanged(function(style) {
+        styles.val(style);
+        css.prop("href", style);
     });
 
-    // on change set style
-    elements.styles.onchange = function() {
-        notesApp.style.set(elements.styles.value);
-        notesApp.store();
-    };
+    // on change set style, must be inside this event handler, cause the dom doesn't exist before this call,
+    styles.on("change", function(event) {
+        app.style.set(styles.val());
+        // save
+        app.store();
+    });
 
     // init application
-    notesApp.restore();
+    app.restore();
 
-})(exports);
+});
