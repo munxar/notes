@@ -5,10 +5,10 @@
     <title>notes</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <link rel="stylesheet" href="styles/style.css">
-    <link id="css" rel="stylesheet" href="styles/default.css">
-    <!--
+    <link rel="stylesheet" href="styles/default.css" id="css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,700,400">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    -->
+
 </head>
 <body>
     <section class="container">
@@ -21,7 +21,7 @@
             </div>
 
             <h1>Notes</h1>
-            <a class="btn newnote" href="edit.html">Neue Notiz</a>
+            <a class="btn newnote" href="edit.html"><span>Neue Notiz</span></a>
         </header>
 
         <aside>
@@ -30,8 +30,8 @@
             </ul>
 
             <!-- finished toggle button -->
-            <ul class="filter">
-                <li id="showFinished"><a href="#">Show finished</a></li>
+            <ul>
+                <li id="showFinished"><a href="#" class="fa fa-check-circle-o"></a></li>
             </ul>
         </aside>
 
@@ -47,10 +47,12 @@
         {{#each this}}
         <li>
             <input type="checkbox" {{checked finished}} data-id="{{id}}">
-            <span>{{name}}</span>
-            <span>{{description}}</span>
-            <span>{{importance}}</span>
-            <a href="edit.html?id={{id}}">bearbeiten</a>
+            <div class="list-group">   
+                <span class="title">{{name}}</span>
+                <span class="description">{{description}}</span>
+                <span class="importance">{{importance}}</span>
+            </div>
+            <a href="edit.html?id={{id}}" class="fa fa-edit"></a>
         </li>
         {{/each}}
     </script>

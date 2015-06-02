@@ -1,46 +1,20 @@
-body {
-	color: #323131;
-}
+body,
+a,
+.btn
+	{ color: #323131; }
 
-a {
-	color: #323131;
-}
+button,
+.btn:hover,
+#filter .active
+	{ background: #313232; }
 
-button {
-	background: #313232;
-}
+.container { background: #f0f0f0; }
 
-.btn {
-  	background: #cdcdcd;
-	color: #333;
-  	border: 2px solid #f4f4f4;
-}
+.btn { background: #dfdfdf; }
+.btn:hover { color: #f4f4f4; }
 
-.btn:hover {
-	background-color: #333;
-	color: #f4f4f4;
-}
+#filter li { background: #ddd; }
 
-.container {
-	background: #f4f4f4;
-}
+.active a { color: #fff; }
 
-#filter li {
-	background: #cdcdcd;
-}
-
-#filter a {
-	text-decoration: none;
-}
-
-#filter .active {
-    background-color: #000;
-}
-
-.active a {
-    color: #fff;
-}
-
-.list span, .list a {
-	background: #fff;
-}
+.list { background: #fff; }

@@ -53,7 +53,7 @@ $(function() {
         app.filter();
     });
 
-    // iof show finished state changes, change class
+    // if show finished state changes, change class
     app.showFinished.onChanged(function(show) {
         showFinished.toggleClass("active", show);
     });

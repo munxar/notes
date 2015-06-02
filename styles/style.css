@@ -1,7 +1,7 @@
 /*
-	Notes
-	Layout Stylesheet only
-	Colors are in default.css or color.css
+** 	Notes
+**	Layout Stylesheet only
+**	Colors are in default.css or color.css
 */
 
 	/* [1] transition: 
@@ -11,11 +11,27 @@
 
 
 body {
-	font-family: Arial, sans-serif;
+	font-family: "Roboto", Arial, sans-serif;
+	line-height: 1.5;
+	font-size: 15px;
 	padding: 0;
 	margin: 0;
 	transition: color 0.5s ease;		/* [1] */
 	transition: background 0.5s ease;	/* [1] */
+}
+
+a {
+	text-decoration: none;
+}
+
+h1 {
+	font-size: 53px;
+	font-weight: 400;
+	line-height: 1;
+}
+
+ul {
+	list-style: none;
 }
 
 .container {
@@ -36,24 +52,27 @@ main {
 
 select {
 	height: 30px;
-	width: 120px;
 	background-color: #fff;
 }
 
 .btn {
-	width: 200px;
+  	padding: 0 30px;
+  	margin-bottom: 10px;
 	text-align: center;
-  	display:block;
+  	display: inline-block;
   	font-size: 16px;
   	cursor: pointer;
   	font-weight: 600;
-  	padding: 10px;
-  	text-decoration: none;
+  	border: 0;
+  	border-radius: 2px;
+	height: 36px;
+	line-height: 36px;
+	vertical-align: middle;
+
 }
 
 .second {
-	width: 176px;
-	margin-top: 15px;
+	color: #9f9f9f !important;
 }
 
 .filter {
@@ -64,78 +83,84 @@ select {
 .filter li {
 	display: inline-block;
 	padding: 10px;
-	margin: 0 5px;
+	margin: 0;
 	text-align: center;
-}
-
-.list {
-	margin: 10px 0;
-	padding: 0;
-	clear: both;
-}
-
-.list li {
-	margin: 7px 0;
-	width: 100%;
-	list-style: none;
-	float: left;
 }
 
 #filter {
 	float: left;
 }
 
+.list {
+	margin: 10px 0;
+	padding: 0;
+	clear: both;
+	overflow: hidden; /* hack for wrapping the hole text with the background-color */
+}
+
 .list ul:after {
 	clear: both;
 }
 
-.list span {
+.list li {
+	margin: 7px 0;
+	width: 100%;
+	float: left;
+}
+
+.list-group {
 	width: 70%;
 	display: block;
 	float: left;
-	text-transform: uppercase;
-	position: relative;
-	padding-left: 20px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e7e7e7;
 }
-/* saved for later work
-.list span:before {
-    content: "\f00c";
-    font-family: FontAwesome;
-    color: #666;
-    font-size: 20px;
-    padding-right: 0.5em;
-}
-*/
+
 .list a {
 	width: 20%;
+	padding-top: 25px; /* same height as .description row */
 	float: right;
 	text-align: center;
-	text-decoration: none;
+	height: 30px; /* bigger click field for mobile users */
 }
 
-.list span, .list a {
-	padding: 10px;
+.list span {
+	display: block;
+	clear: both;
 }
 
-.list a, .filter a {
-	text-decoration: none;
-	line-height: 21px; /* fix for same height as .list span element */
+.list input {
+	float: left;
+	width: 8%;
+	margin-left: 2%;
+	padding-top: 25px;
+}
+
+.list .title {
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.list .description {
+	color: #bbb;
+	font-weight: 300;
 }
 
 #showFinished {
 	float: right;
+	font-size: 26px;
+	line-height: 0;
 }
-
-input {
-	height: 15px;
-}
-
 
 input, textarea {
 	padding: 8px;
 	margin: 8px 0;
 	width: 40%;
 	font-size: 16px;
+}
+
+input {
+	height: 15px;
 }
 
 
@@ -150,23 +175,61 @@ input, textarea {
 		width: 90%;
 	}
 
-	.btn {
-		width: 94%;
-		margin: 5px 0;
+	.newnote {
+		position: fixed;
+		padding: 0;
+		margin: 0;
+		right: 24px;
+		bottom: 45px;
+		height: 55.5px;
+		width: 55.5px;
+		line-height: 56px;
+		border-radius: 50%;
+		box-shadow: 0px 2px 10px rgba(0,0,0,0.16);
+		z-index: 998;
 	}
 
-	button {
-		width: 100% !important; /* Button width */
+	.newnote span {
+		display: none;
+	}
+
+	.newnote:before {
+		content: "";
+		top: 20px;
+		left: 26px;
+		position: absolute;
+		height: 15px;
+		width: 3px;
+		background-color: #fff;
+	}
+
+	.newnote:after {
+		content: "";
+		top: 26px;
+		left: 20px;
+		position: absolute;
+		height: 3px;
+		width: 15px;
+		background-color: #fff;
+	}
+
+	#filter {
+		width: 80%;
+		float: left;
+	}
+
+	#finished {
+		width: 20%;
+		float: right;
 	}
 
 	.filter li {
-		padding: 7px 0.8%;
-		margin: 0;
-		width: 31.3333%;
+		font-size: 14px;
+		padding: 7px 9px;
 	}
 
 	#showFinished {
-		float: left;
+		float: right;
 	}
 
 	label {
