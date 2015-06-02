@@ -147,7 +147,6 @@ select {
 }
 
 #showFinished {
-	float: right;
 	font-size: 26px;
 	line-height: 0;
 }
@@ -214,22 +213,18 @@ input {
 	}
 
 	#filter {
-		width: 80%;
+		width: 90%;
 		float: left;
 	}
 
 	#finished {
-		width: 20%;
+		width: 10%;
 		float: right;
 	}
 
 	.filter li {
 		font-size: 14px;
 		padding: 7px;
-	}
-
-	#showFinished {
-		float: right;
 	}
 
 	label {
