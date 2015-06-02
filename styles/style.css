@@ -172,6 +172,7 @@ input {
 
 	.container {
 		width: 90%;
+		padding-bottom: 100px; /* required because button newnote would block/overlay edit button */
 	}
 
 	.newnote {
