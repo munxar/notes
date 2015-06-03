@@ -50,7 +50,7 @@
 
         // filtering
         var filteredNotes = notes.filter(function(note) {
-            return app.showFinished.get() ? true : !note.finished;
+            return app.showFinished.get() ? note.finished : !note.finished;
         });
 
         // sorting
