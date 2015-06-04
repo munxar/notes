@@ -9,21 +9,25 @@
 	** color declerations are in the theme css
 	*/
 
+	/* Font weight:
+	** 300 Light
+	** 400 Medium
+	** 700 Bold
+	*/
+
 /*------------------------------------*\
     #GLOBAL TAGS
 \*------------------------------------*/
 
-
 body {
-	font-family: "Roboto", Arial, sans-serif;
-	line-height: 1.5;
-	font-size: 15px;
-	padding: 0;
 	margin: 0;
+	padding: 0;
+	font-family: "Roboto", Arial, sans-serif;
+	font-size: 15px;
+	line-height: 1.5;
 }
 
 a {	text-decoration: none; }
-
 
 h1 {
 	font-size: 53px;
@@ -51,8 +55,7 @@ input, textarea {
 
 input {	height: 15px; }
 
-
-::-webkit-input-placeholder { color: #fff; }
+::-webkit-input-placeholder { color: #fff; /* Hide placeholder for desktop view */ }
 
 header,
 aside {
@@ -72,14 +75,14 @@ body,
 body,
 a {	transition: color 0.3s ease; /* [1] */ }
 
+/*------------------------------------*\
+    #MAIN
+\*------------------------------------*/
+
 .container {
 	width: 900px;
 	margin: 0 auto;
 	padding: 20px;
-}
-
-#theme {
-	margin-top: 25px;
 }
 
 .btn {
@@ -97,6 +100,18 @@ a {	transition: color 0.3s ease; /* [1] */ }
 	vertical-align: middle;
 }
 
+/*------------------------------------*\
+    #HEADER
+\*------------------------------------*/
+
+#theme {
+	margin-top: 25px;
+}
+
+/*------------------------------------*\
+    #FILTER
+\*------------------------------------*/
+
 .filter {
 	padding: 0;
 	margin: 20px 0;
@@ -112,6 +127,10 @@ a {	transition: color 0.3s ease; /* [1] */ }
 	text-align: center;
 }
 
+/*------------------------------------*\
+    #LIST
+\*------------------------------------*/
+
 .list {
 	margin: 10px 0;
 	padding: 0;
@@ -120,10 +139,12 @@ a {	transition: color 0.3s ease; /* [1] */ }
 .list li {
 	margin: 7px 0;
 	padding: 10px 5px;
+	text-align: center;
 	display: flex;
 	display: -webkit-flex;
-	text-align: center;
 }
+
+.list span { display: block; /* we need this for line breaks */ }
 
 .list input {
 	flex-grow: 1;
@@ -148,11 +169,9 @@ a {	transition: color 0.3s ease; /* [1] */ }
 	-webkit-flex: 1;
 }
 
-.list span { display: block; }
-
 .list .title {
-	text-transform: uppercase;
 	font-weight: 700;
+	text-transform: uppercase;
 }
 
 .list .description {
@@ -169,6 +188,7 @@ a {	transition: color 0.3s ease; /* [1] */ }
 
 /* Mobile View */
 @media only screen and (max-width : 768px) {
+
 	label { display: none; }
 
 	input { height: 15px; }

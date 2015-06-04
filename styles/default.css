@@ -13,7 +13,7 @@ a:hover 	{ color: #ccc; }
 .btn 		{ background: #dfdfdf; }
 .btn:hover 	{ color: #f4f4f4; }
 
-.second { color: #9f9f9f !important; }
+.second { color: #9f9f9f; }
 
 #filter li 	{ background: #ddd; }
 
