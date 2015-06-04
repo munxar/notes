@@ -20,3 +20,5 @@ a:hover 	{ color: #ccc; }
 .active a 	{ color: #fff; }
 
 .list 		{ background: #fff; }
+
+form input { border-color: #ccc }

@@ -11,16 +11,21 @@ body,
 
 .filter a,
 .list a,
-#showFinished a	{ color: #323131; }
+a.fa-check-circle-o	{ color: #323131; }
 
 #showFinished.active a { color: #ef572e; }
+
+a:hover 		{ color: #f4f4f4; } /* global Link hover */
+
+a:hover.fa 		{ color: #ecd7c9; } /* only for font awesome icons hover effect */
 
 .container 		{ background: #f4f4f4; }
 
 .list			{ background: #fff; }
 
-.btn			{ border: 2px solid #f4f4f4; }
-
 .second			{ background: #666; color: #9f9f9f; }
 
 #filter li		{ background: #cdcdcd; }
+
+form input,
+form textarea { border-color: #ecd7c9; }
