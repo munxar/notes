@@ -17,6 +17,8 @@
   "dependencies": {
     "jasmine": "~2.3.4",
     "jquery": "~2.1.4",
-    "handlebars": "~3.0.3"
+    "handlebars": "~3.0.3",
+    "fontawesome": "~4.3.0",
+    "roboto-fontface": "~0.4.2"
   }
 }
