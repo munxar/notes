@@ -9,6 +9,10 @@
 	** color declerations are in the theme css
 	*/
 
+/*------------------------------------*\
+    #GLOBAL TAGS
+\*------------------------------------*/
+
 
 body {
 	font-family: "Roboto", Arial, sans-serif;
@@ -16,13 +20,10 @@ body {
 	font-size: 15px;
 	padding: 0;
 	margin: 0;
-	transition: color 0.5s ease;		/* [1] */
-	transition: background 0.5s ease;	/* [1] */
 }
 
-a {
-	text-decoration: none;
-}
+a {	text-decoration: none; }
+
 
 h1 {
 	font-size: 53px;
@@ -32,28 +33,53 @@ h1 {
 }
 
 ul {
+	margin: 0;
+	padding: 0;
 	list-style: none;
-}
-
-.container {
-	background: #f4f4f4;
-	width: 900px;
-	margin: 0 auto;
-	padding: 20px;
-}
-
-header {
-	display: flex;
-	justify-content: space-between;
-}
-
-#theme {
-	margin-top: 25px;
 }
 
 select {
 	height: 30px;
 	background-color: #fff;
+}
+
+input, textarea {
+	padding: 8px;
+	margin: 8px 0;
+	font-size: 16px;
+}
+
+input {	height: 15px; }
+
+
+::-webkit-input-placeholder { color: #fff; }
+
+header,
+aside {
+	display: flex;
+	display: -webkit-flex; 					/* Safari */
+	justify-content: space-between;
+	webkit-justify-content: space-between;	/* Safari */
+}
+
+/*------------------------------------*\
+    #ANIMATION
+\*------------------------------------*/
+
+body,
+.btn { transition: background 0.5s ease; /* [1] */ }
+
+body,
+a {	transition: color 0.3s ease; /* [1] */ }
+
+.container {
+	width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+#theme {
+	margin-top: 25px;
 }
 
 .btn {
@@ -69,23 +95,15 @@ select {
 	height: 36px;
 	line-height: 36px;
 	vertical-align: middle;
-
-}
-
-.second {
-	color: #9f9f9f !important;
-}
-
-aside {
-	display: flex;
-	justify-content: space-between;
 }
 
 .filter {
 	padding: 0;
 	margin: 20px 0;
 	display: flex;
+	display: -webkit-flex;
 	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
 }
 
 .filter li {
@@ -103,11 +121,13 @@ aside {
 	margin: 7px 0;
 	padding: 10px 5px;
 	display: flex;
+	display: -webkit-flex;
 	text-align: center;
 }
 
 .list input {
 	flex-grow: 1;
+	-webkit-flex-grow: 1;
 }
 
 .list-group {
@@ -115,18 +135,20 @@ aside {
 	border-bottom: 1px solid #e7e7e7;
 	text-align: left;
 	flex: 1;
+	-webkit-flex: 1;
 	flex-grow: 10;
+	-flex-grow: 1;
 }
 
 .list a {
+	padding-top: 25px; 	/* same height as .description row */
+	height: 30px;		/* bigger click field for mobile users */
+	font-size: 20px;
 	flex-grow: 1;
-	padding-top: 25px; /* same height as .description row */
-	height: 30px; /* bigger click field for mobile users */
+	-webkit-flex: 1;
 }
 
-.list span {
-	display: block;
-}
+.list span { display: block; }
 
 .list .title {
 	text-transform: uppercase;
@@ -139,33 +161,29 @@ aside {
 }
 
 #showFinished {
+	margin-right: 35px;
 	font-size: 36px;
 	line-height: 48px; /* same height as filter buttons */
 	text-align: right;
-	margin-right: 35px;
-}
-
-input, textarea {
-	padding: 8px;
-	margin: 8px 0;
-	font-size: 16px;
-}
-
-input {
-	height: 15px;
-}
-
-
-::-webkit-input-placeholder {
-	color: #fff;
 }
 
 /* Mobile View */
 @media only screen and (max-width : 768px) {
+	label { display: none; }
+
+	input { height: 15px; }
+
+	::-webkit-input-placeholder { color: #323131; }
+
+	input, textarea {
+		padding: 5px;
+		margin: 3px 0;
+		font-size: 16px;
+	}
 
 	.container {
-		width: 90%;
-		padding-bottom: 100px; /* required because button newnote would block/overlay edit button */
+		width: 90%; 			/* I want some space, so dont use 100% */
+		padding-bottom: 100px; 	/* required! because button newnote would block/overlay edit button */
 	}
 
 	.newnote {
@@ -182,54 +200,33 @@ input {
 		z-index: 998;
 	}
 
-	.newnote span {
-		display: none;
+	.newnote span {	display: none; }
+	
+	.newnote:before,
+	.newnote:after {
+		content: "";
+		position: absolute;
+		background-color: #fff;
 	}
 
 	.newnote:before {
-		content: "";
 		top: 20px;
 		left: 26px;
-		position: absolute;
 		height: 15px;
-		width: 3px;
-		background-color: #fff;
+		width: 3px;	
 	}
 
 	.newnote:after {
-		content: "";
 		top: 26px;
 		left: 20px;
-		position: absolute;
 		height: 3px;
 		width: 15px;
-		background-color: #fff;
 	}
 
-	#showFinished {
-		margin-right: 10px;
-	}
+	#showFinished { margin-right: 10px; }
 
 	.filter li {
 		font-size: 14px;
 		padding: 10px 5px;
-	}
-
-	label {
-		display: none;
-	}
-
-	input {
-		height: 15px;
-	}
-
-	::-webkit-input-placeholder {
-		color: #323131;
-	}
-
-	input, textarea {
-		padding: 5px;
-		margin: 3px 0;
-		font-size: 16px;
 	}
 }

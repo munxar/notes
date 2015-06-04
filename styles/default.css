@@ -1,20 +1,22 @@
 body,
 a,
-.btn
-	{ color: #323131; }
+.btn 		{ color: #323131; }
 
+#filter .active,
 button,
-.btn:hover,
-#filter .active
-	{ background: #313232; }
+.btn:hover	{ background: #313232; }
 
-.container { background: #f0f0f0; }
+.container 	{ background: #f0f0f0; }
 
-.btn { background: #dfdfdf; }
-.btn:hover { color: #f4f4f4; }
+a:hover 	{ color: #ccc; }
 
-#filter li { background: #ddd; }
+.btn 		{ background: #dfdfdf; }
+.btn:hover 	{ color: #f4f4f4; }
 
-.active a { color: #fff; }
+.second { color: #9f9f9f !important; }
 
-.list { background: #fff; }
+#filter li 	{ background: #ddd; }
+
+.active a 	{ color: #fff; }
+
+.list 		{ background: #fff; }
