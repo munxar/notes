@@ -3,13 +3,15 @@
  */
 
 var express = require("express");
+var ctrl = require("./controller");
 
 var api = new express.Router();
 
-api.get("/notes", function(req, res) { res.json([]); });
-api.get("/notes/:id", function(req, res) { res.json({}); });
-api.delete("/notes/:id", function(req, res) { res.json({}); });
-api.put("/notes/:id", function(req, res) { res.json({}); });
-api.post("/notes", function(req, res) { res.json({}); });
+api.get("/", ctrl.info);
+api.get("/notes", ctrl.getAll);
+api.post("/notes", ctrl.create);
+api.get("/notes/:id", ctrl.getOne);
+api.delete("/notes/:id", ctrl.delete);
+api.put("/notes/:id", ctrl.update);
 
 module.exports = api;
