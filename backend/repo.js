@@ -14,16 +14,19 @@ repo.getOne = function(id) {
     return Note.findById(id);
 };
 
-repo.delete = function(id) {
-    return Note.findByIdAndRemove(id);
+repo.delete = function(note) {
+    console.log(note);
+    return note.delete();
 };
 
 repo.create = function(note) {
     return new Note(note).save();
 };
 
-repo.update = function(id, data) {
-    return Note.findByIdAndUpdate(id, data);
+repo.update = function(note, data) {
+    console.log(data);
+    note.name = data.name;
+    return note.save();
 };
 
 module.exports = repo;

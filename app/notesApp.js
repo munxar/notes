@@ -80,8 +80,11 @@
      * @param id note id
      * @return {*|Note}
      */
-    NotesApp.prototype.getNote = function(id) {
-        return this.notes.get().filter(function(note) { return note.id === id; })[0];
+    NotesApp.prototype.getNote = function(id, cb) {
+        $.get("api/notes/" + id, function(note) {
+            cb(note);
+        });
+        //return this.notes.get().filter(function(note) { return note.id === id; })[0];
     };
 
 
@@ -126,9 +129,14 @@
         this.showFinished.set(JSON.parse(storage.getItem("showFinished")) || this.showFinished.get());
         this.style.set(JSON.parse(storage.getItem("style")) || this.style.get());
 
+        var self = this;
+        $.get("api/notes", function(data) {
+            self.notes.set(data);
+        });
+
         var notes = JSON.parse(storage.getItem("notes") || JSON.stringify(this.notes.get()))
             .map(function(note) { return new Note(note); });
-        this.notes.set(notes);
+        //this.notes.set(notes);
     };
 
     // exports

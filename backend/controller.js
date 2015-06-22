@@ -15,18 +15,23 @@ ctrl.getAll = function(req, res) {
     }, onError(res));
 };
 
-ctrl.getOne = function(req, res) {
-    repo.getOne(req.params.id).then(function(note) {
+ctrl.getNote = function(req, res, next) {
+    repo.getOne(req.params.noteId).then(function(note) {
         if(note) {
-            res.json(note);
+            req.note = note;
+            next();
         } else {
             res.status(404).json({ error: "Not Found"});
         }
     }, onError(res));
 };
 
+ctrl.getOne = function(req, res) {
+    res.json(req.note);
+};
+
 ctrl.delete = function(req, res) {
-    repo.delete(req.params.id).then(function(note) {
+    repo.delete(req.note).then(function(note) {
         res.json(note);
     }, onError(res));
 };
@@ -38,7 +43,7 @@ ctrl.create = function(req, res) {
 };
 
 ctrl.update = function(req, res) {
-    repo.update(req.id, req.body).then(function(note) {
+    repo.update(req.note, req.body).then(function(note) {
         res.json(note);
     }, onError(res));
 };

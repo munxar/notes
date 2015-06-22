@@ -3,6 +3,7 @@
  */
 var express = require("express");
 var bodyParser = require("body-parser");
+var morgan = require("morgan");
 var mongoose = require("mongoose");
 var path = require("path");
 var config = require("./config");
@@ -20,6 +21,7 @@ function main(err, connection) {
     var app = express();
 
     // serve static files
+    app.use(morgan("dev"));
     app.use(express.static(path.join(__dirname, config.webdir)));
     app.use(bodyParser.json());
     // mount api

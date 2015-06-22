@@ -7,11 +7,12 @@ var ctrl = require("./controller");
 
 var api = new express.Router();
 
+api.param("noteId", ctrl.getNote);
 api.get("/", ctrl.info);
 api.get("/notes", ctrl.getAll);
 api.post("/notes", ctrl.create);
-api.get("/notes/:id", ctrl.getOne);
-api.delete("/notes/:id", ctrl.delete);
-api.put("/notes/:id", ctrl.update);
+api.get("/notes/:noteId", ctrl.getOne);
+api.delete("/notes/:noteId", ctrl.delete);
+api.put("/notes/:noteId", ctrl.update);
 
 module.exports = api;
