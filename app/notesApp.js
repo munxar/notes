@@ -78,15 +78,14 @@
     /**
      * get a node by id
      * @param id note id
+     * @param cb callback(function(note){})
      * @return {*|Note}
      */
     NotesApp.prototype.getNote = function(id, cb) {
-        $.get("api/notes/" + id, function(note) {
-            cb(note);
-        });
+        id ? $.get("api/notes/" + id, cb) : cb(new Note());
+
         //return this.notes.get().filter(function(note) { return note.id === id; })[0];
     };
-
 
     /**
      * append a new note and adds it to the notes array

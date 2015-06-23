@@ -16,6 +16,7 @@ ctrl.getAll = function(req, res) {
 };
 
 ctrl.getNote = function(req, res, next) {
+
     repo.getOne(req.params.noteId).then(function(note) {
         if(note) {
             req.note = note;
@@ -49,7 +50,7 @@ ctrl.update = function(req, res) {
 };
 
 function onError(res) {
-    return function(err) { res.json({ error: err }); }
+    return function(err) { res.status(500).json({ error: err }); }
 }
 
 module.exports = ctrl;

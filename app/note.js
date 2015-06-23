@@ -12,7 +12,7 @@
     function Note(args) {
         args = args || {};
 
-        this.id = args.id || util.genId();
+        this._id = args._id || undefined;
         this.done = args.done || false;
         this.name = args.name || "";
         this.finished = args.finished || false;
