@@ -43,14 +43,19 @@ $(function() {
     // if note finished input changes, set model and update list
     list.on("change", "input", function(event) {
         var target = $(event.target);
-        // get note by id
-        var note = app.getNote(target.data("id"));
-        // set to finished
-        note.finished = target.prop("checked");
-        // save changes
-        app.store();
-        // update list
-        app.filter();
+        var id = target.data("id");
+        $.ajax({
+            type: "PUT",
+            url: "api/notes/" + id,
+            data: JSON.stringify({ finished: target.prop("checked")}),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function(request) {
+                app.restore();
+                // update list
+                app.filter();
+            }
+        });
     });
 
     // if show finished state changes, change class
