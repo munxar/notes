@@ -4,6 +4,7 @@
 
 var Note = require("./model");
 
+// repository to hide mongoose layer
 var repo = {};
 
 repo.getAll = function() {

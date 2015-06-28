@@ -3,6 +3,7 @@
  */
 var mongoose = require("mongoose");
 
+// Note Schema
 var NoteSchema = mongoose.Schema({
     name: { type: String, default: "" },
     description: { type: String, default: "" },

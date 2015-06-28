@@ -3,6 +3,7 @@
  */
 var repo = require("./repository");
 
+// controller layer
 var ctrl = {};
 
 ctrl.getAll = function(req, res) {
@@ -11,41 +12,36 @@ ctrl.getAll = function(req, res) {
     }, onError(res));
 };
 
-ctrl.getNote = function(req, res, next) {
-    repo.getOne(req.params.noteId).then(function(note) {
-        if(note) {
-            req.note = note;
-            next();
-        } else {
-            res.status(404).json({ error: "Not Found"});
-        }
-    }, onError(res));
-};
-
 ctrl.getOne = function(req, res) {
-    repo.getOne(req.params.id).then(function(note) { res.json(note);} , onError(res));
+    repo.getOne(req.params.id).then(onSuccess(res), onError(res));
 };
 
 ctrl.delete = function(req, res) {
-    repo.delete(req.params.id).then(function(note) {
-        res.json(note);
-    }, onError(res));
+    repo.delete(req.params.id).then(onSuccess(res), onError(res));
 };
 
 ctrl.create = function(req, res) {
-    repo.create(req.body).then(function(note) {
-        res.json(note);
-    }, onError(res));
+    repo.create(req.body).then(onSuccess(res), onError(res));
 };
 
 ctrl.update = function(req, res) {
-    repo.update(req.params.id, req.body).then(function(note) {
-        res.json(note);
-    }, onError(res));
+    repo.update(req.params.id, req.body).then(onSuccess(res), onError(res));
 };
 
+ctrl.onError = function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
+};
+
+function onSuccess(res) {
+    return function(note) {
+        if(!note) return res.status(404).json();
+        res.json(note);
+    };
+}
+
 function onError(res) {
-    return function(err) { res.status(500).json({ error: err }); }
+    return function(err) { res.status(500).json({ error: err }); };
 }
 
 module.exports = ctrl;
