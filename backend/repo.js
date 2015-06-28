@@ -16,17 +16,16 @@ repo.getOne = function(id) {
     return mongoose.Types.ObjectId.isValid(id) ? Note.findById(id) : new mongoose.Promise();
 };
 
-repo.delete = function(note) {
-    return note.remove();
+repo.delete = function(id) {
+    return Note.findByIdAndRemove(id);
 };
 
-repo.create = function(note) {
-    return Note.create(note);
+repo.create = function(data) {
+    return Note.create(data);
 };
 
-repo.update = function(note, data) {
-    lodash.extend(note, data);
-    return note.save();
+repo.update = function(id, data) {
+    return Note.findByIdAndUpdate(id, data);
 };
 
 module.exports = repo;

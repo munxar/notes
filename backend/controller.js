@@ -23,11 +23,11 @@ ctrl.getNote = function(req, res, next) {
 };
 
 ctrl.getOne = function(req, res) {
-    res.json(req.note);
+    repo.getOne(req.params.id).then(function(note) { res.json(note);} , onError(res));
 };
 
 ctrl.delete = function(req, res) {
-    repo.delete(req.note).then(function(note) {
+    repo.delete(req.params.id).then(function(note) {
         res.json(note);
     }, onError(res));
 };
@@ -39,7 +39,7 @@ ctrl.create = function(req, res) {
 };
 
 ctrl.update = function(req, res) {
-    repo.update(req.note, req.body).then(function(note) {
+    repo.update(req.params.id, req.body).then(function(note) {
         res.json(note);
     }, onError(res));
 };

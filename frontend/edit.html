@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>notes / details</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/default.css" id="css">
+    <link rel="stylesheet" href="lib/roboto-fontface/css/roboto-fontface.css">
+    <link rel="stylesheet" href="lib/fontawesome/css/font-awesome.min.css">
+</head>
+<body>
+    <form id="form" class="container">
+        <div>
+            <label for="name">Name: </label><br>
+            <input name="name" id="name" type="text" placeholder="Name" autofocus>
+        </div>
+
+        <div>
+            <label for="description">Description:</label><br>
+            <textarea name="description" id="description" placeholder="Description"></textarea>
+        </div>
+
+        <div>
+            <label for="importance">Importance:</label><br>
+            <input name="importance" id="importance" type="number">
+        </div>
+
+        <div>
+            <label for="finishDate">Finish Date:</label><br>
+            <input name="finishDate" id="finishDate" type="date">
+        </div>
+        <button class="btn" type="submit">Speichern</button>
+        <a class="second btn" href="index.html">Abbrechen</a>
+        <button class="btn" id="delete-button" type="button">Löschen</button>
+    </form>
+
+    <script>var exports = {}</script>
+    <script src="app/util.js"></script>
+    <script src="app/storage.js"></script>
+    <script src="app/property.js"></script>
+    <script src="app/note.js"></script>
+    <script src="app/notesApp.js"></script>
+
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/handlebars/handlebars.js"></script>
+    <script src="edit.js"></script>
+</body>
+</html>

@@ -9,9 +9,8 @@ var api = new express.Router();
 
 api.get("/notes", ctrl.getAll);
 api.post("/notes", ctrl.create);
-api.param("noteId", ctrl.getNote);
-api.get("/notes/:noteId", ctrl.getOne);
-api.delete("/notes/:noteId", ctrl.delete);
-api.put("/notes/:noteId", ctrl.update);
+api.get("/notes/:id", ctrl.getOne);
+api.put("/notes/:id", ctrl.update);
+api.delete("/notes/:id", ctrl.delete);
 
 module.exports = api;
