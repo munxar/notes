@@ -11,10 +11,10 @@ describe("Note", function() {
         expect(note.name).toBe("");
     });
 
-    it("has done property with default false", function () {
+    it("has finished property with default false", function () {
         var note = new Note();
 
-        expect(note.done).toBe(false);
+        expect(note.finished).toBe(false);
     });
 
     it("has creationDate", function () {
@@ -50,11 +50,11 @@ describe("Note", function() {
     it("create Note from json", function () {
         var date1 = Date.UTC(2015,6,1);
         var date2 = Date.UTC(2016,1,6);
-        var note = new Note({ name: "one", done: true, creationDate: date1, finishDate: date2, description: "hallo", importance: 42 });
+        var note = new Note({ name: "one", finished: true, creationDate: date1, finishDate: date2, description: "hallo", importance: 42 });
 
         expect(note.name).toBe("one");
         expect(note.description).toBe("hallo");
-        expect(note.done).toBe(true);
+        expect(note.finished).toBe(true);
         expect(note.creationDate).toBe("2015-07-01");
         expect(note.finishDate).toBe("2016-02-06");
         expect(note.importance).toBe(42);

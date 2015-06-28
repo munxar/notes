@@ -36,29 +36,10 @@ describe("NotesApp", function() {
         expect(app.storage.getItem("showFinished")).toBe("false");
     });
 
-    it("getNote by id", function () {
-        var app = new NotesApp();
-        var note1 = new Note();
-        var note2 = new Note();
-        app.notes.get().push(note1);
-        app.notes.get().push(note2);
-
-        var note = app.getNote(note1.id);
-
-        expect(note).toBe(note1);
-    });
-
     it("createNote creates note, and adds it to the nots arra", function () {
         var app = new NotesApp();
         var note = app.createNote();
         expect(app.notes.get()).toEqual([note]);
-    });
-
-    it("getNote returns undefined if index doesn't exist", function () {
-        var app = new NotesApp();
-        var note = app.getNote(1);
-
-        expect(note).toEqual(undefined);
     });
 
     it("has filtered notes", function () {

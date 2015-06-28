@@ -10,30 +10,43 @@
     <link rel="stylesheet" href="lib/fontawesome/css/font-awesome.min.css">
 </head>
 <body>
-    <form id="form" class="container">
-        <div>
-            <label for="name">Name: </label><br>
-            <input name="name" id="name" type="text" placeholder="Name" autofocus>
-        </div>
 
-        <div>
-            <label for="description">Description:</label><br>
-            <textarea name="description" id="description" placeholder="Description"></textarea>
-        </div>
+    <div id="formContainer">
 
-        <div>
-            <label for="importance">Importance:</label><br>
-            <input name="importance" id="importance" type="number">
-        </div>
+    </div>
 
-        <div>
-            <label for="finishDate">Finish Date:</label><br>
-            <input name="finishDate" id="finishDate" type="date">
-        </div>
-        <button class="btn" type="submit">Speichern</button>
-        <a class="second btn" href="index.html">Abbrechen</a>
-        <button class="btn" id="delete-button" type="button">Löschen</button>
-    </form>
+    <script id="formTemplate" type="text/x-handlebars-template">
+        <form id="form" class="container">
+            <div>
+                <label for="name">Name: </label><br>
+                <input name="name" id="name" type="text" placeholder="Name" autofocus value="{{name}}">
+            </div>
+
+            <div>
+                <label for="description">Description:</label><br>
+                <textarea name="description" id="description" placeholder="Description">{{description}}</textarea>
+            </div>
+
+            <div>
+                <label for="importance">Importance:</label><br>
+                <input name="importance" id="importance" type="number" value="{{importance}}">
+            </div>
+
+            <div>
+                <label for="finishDate">Finish Date:</label><br>
+                <input name="finishDate" id="finishDate" type="date" value="{{finishDate}}">
+            </div>
+            <input type="hidden" id="_id" value="{{_id}}">
+            <button class="btn" type="submit">Speichern</button>
+            <a class="second btn" href="/">Abbrechen</a>
+            {{#if _id}}
+            <button class="btn" id="delete-button" type="button">Löschen</button>
+            {{/if}}
+        </form>
+    </script>
+
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/handlebars/handlebars.js"></script>
 
     <script>var exports = {}</script>
     <script src="app/util.js"></script>
@@ -43,8 +56,6 @@
     <script src="app/service.js"></script>
     <script src="app/notesApp.js"></script>
 
-    <script src="lib/jquery/dist/jquery.js"></script>
-    <script src="lib/handlebars/handlebars.js"></script>
     <script src="edit.js"></script>
 </body>
 </html>

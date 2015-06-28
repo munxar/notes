@@ -7,6 +7,7 @@
     // imports
     var util = exports.util;
     var NotesApp = exports.NotesApp;
+    var Note = exports.Note;
     var noteService = exports.noteService;
 
     // create app
@@ -14,62 +15,48 @@
 
     // convert query string to key/value pair object
     var params = util.queryParameter(location.search);
-    // get elements from dom
-    var form = $("#form");
-    var css = $("#css");
-    var deleteButton = $("#delete-button");
+    var formTemplate = Handlebars.compile($("#formTemplate").html());
 
     // set style
-    css.prop("href", app.style.get());
+    $("#css").prop("href", app.style.get());
 
     noteService.getById(params.id, function(note) {
         var id = note._id;
+        $("#formContainer").html(formTemplate(note));
 
-        form.on("submit", note._id != undefined ? save : create);
+        $("#form").on("submit", id != undefined ? save : create);
 
-        deleteButton.on("click", function() {
+        $("#delete-button").on("click", function() {
             noteService.delete(id, function() {
                 window.location = "index.html";
             });
         });
 
-        setModel(note);
-
         function save(e) {
             e.preventDefault();
-            getModel();
 
-            noteService.update(id, note, function() {
+            noteService.update(id, getModel(), function() {
                 window.location = "index.html";
             });
         }
 
         function create(e) {
             e.preventDefault();
-            getModel();
 
-            noteService.create(note, function() {
+            noteService.create(getModel(), function() {
                 window.location = "index.html";
             });
         }
-
-        function setModel(note) {
-            for(var attr in note) {
-                var input = $("#" + attr);
-                if(input) {
-                    input.val(note[attr]);
-                }
-            }
-        }
-
-        function getModel() {
-            for(var attr in note) {
-                var input = $("#" + attr);
-                if(input) {
-                    note[attr] = input.val();
-                }
-            }
-        }
     });
 
+    function getModel() {
+        var note = new Note();
+        for(var attr in note) {
+            var input = $("#" + attr);
+            if(input) {
+                note[attr] = input.val();
+            }
+        }
+        return note;
+    }
 })(exports);

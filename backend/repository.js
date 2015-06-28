@@ -20,6 +20,7 @@ repo.delete = function(id) {
 };
 
 repo.create = function(data) {
+    delete data._id; // remove id if present
     return Note.create(data);
 };
 
