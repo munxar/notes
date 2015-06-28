@@ -27,11 +27,14 @@
         this.notes = new Property([]);
         this.filteredNotes = new Property([]);
         this.filterIndex = new Property(0);
-        this.showFinished = new Property(false);
-        this.style = new Property("styles/default.css");
+        this.showFinished = new Property(JSON.parse(storage.getItem("showFinished") || "false"));
+        this.style = new Property(JSON.parse(storage.getItem("style") || "'styles/default.css'"));
 
         // apply filter
-        this.showFinished.onChanged(this.filter.bind(this));
+        this.showFinished.onChanged(function(value) {
+            self.filter();
+        });
+
         this.notes.onChanged(this.filter.bind(this));
 
         this.filterIndex.onChanged(function() {
@@ -41,6 +44,7 @@
             self.filter();
             self.store();
         });
+
     }
 
     /**

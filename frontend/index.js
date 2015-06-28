@@ -38,7 +38,6 @@ $(function() {
     filterList.on("click", "a", function(event) {
         var index = $(event.target).data("index");
         app.filterIndex.set(index);
-
     });
 
     // if note finished input changes, set model and update list

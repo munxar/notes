@@ -3,8 +3,6 @@
  */
 
 var Note = require("./model");
-var mongoose = require("mongoose");
-var lodash = require("lodash");
 
 var repo = {};
 
@@ -13,7 +11,7 @@ repo.getAll = function() {
 };
 
 repo.getOne = function(id) {
-    return mongoose.Types.ObjectId.isValid(id) ? Note.findById(id) : new mongoose.Promise();
+    return Note.findById(id);
 };
 
 repo.delete = function(id) {
@@ -25,7 +23,6 @@ repo.create = function(data) {
 };
 
 repo.update = function(id, data) {
-    console.log(id);
     return Note.findByIdAndUpdate(id, data);
 };
 
