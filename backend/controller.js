@@ -39,6 +39,7 @@ ctrl.create = function(req, res) {
 };
 
 ctrl.update = function(req, res) {
+    console.log(req.params);
     repo.update(req.params.id, req.body).then(function(note) {
         res.json(note);
     }, onError(res));

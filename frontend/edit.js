@@ -1,12 +1,13 @@
 /**
  * Created by saschaaeppli on 21.05.15.
  */
-(function(exports) {
+;(function(exports) {
     'use strict';
 
     // imports
     var util = exports.util;
     var NotesApp = exports.NotesApp;
+    var noteService = exports.noteService;
 
     // create app
     var app = new NotesApp(window.localStorage);
@@ -16,20 +17,19 @@
     // get elements from dom
     var form = $("#form");
     var css = $("#css");
+    var deleteButton = $("#delete-button");
 
     // set style
-    css.href = app.style.get();
+    css.prop("href", app.style.get());
 
-    app.getNote(params.id, function(note) {
+    noteService.getById(params.id, function(note) {
+        var id = note._id;
 
-        form.onsubmit = note._id != undefined ? save : create;
+        form.on("submit", note._id != undefined ? save : create);
 
-        $("#delete-button").click(function() {
-            $.ajax({type: "DELETE",
-                url: "api/notes/" + note._id,
-                success: function(request) {
-                    window.location = "index.html";
-                }
+        deleteButton.on("click", function() {
+            noteService.delete(id, function() {
+                window.location = "index.html";
             });
         });
 
@@ -37,18 +37,10 @@
 
         function save(e) {
             e.preventDefault();
-
             getModel();
 
-            $.ajax({
-                type: "PUT",
-                url: "api/notes/" + note._id,
-                data: JSON.stringify(note),
-                dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                success: function(request) {
-                    window.location = "index.html";
-                }
+            noteService.update(id, note, function() {
+                window.location = "index.html";
             });
         }
 
@@ -56,15 +48,8 @@
             e.preventDefault();
             getModel();
 
-            $.ajax({
-                type: "POST",
-                url: "api/notes",
-                data: JSON.stringify(note),
-                dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                success: function(request) {
-                    window.location = "index.html";
-                }
+            noteService.create(note, function() {
+                window.location = "index.html";
             });
         }
 

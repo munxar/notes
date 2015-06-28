@@ -25,6 +25,7 @@ repo.create = function(data) {
 };
 
 repo.update = function(id, data) {
+    console.log(id);
     return Note.findByIdAndUpdate(id, data);
 };
 

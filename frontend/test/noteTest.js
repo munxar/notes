@@ -18,15 +18,15 @@ describe("Note", function() {
     });
 
     it("has creationDate", function () {
-        var note = new Note();
+        var note = new Note({ creationDate: Date.UTC(1980,1,17,0,0,0) });
 
-        expect(note.creationDate instanceof Date).toBe(true);
+        expect(note.creationDate).toEqual("1980-02-17");
     });
 
     it("has finishedDate", function () {
-        var note = new Note();
+        var note = new Note({ finishDate: Date.UTC(2000,3,1,0,0,0)});
 
-        expect(note.finishDate instanceof Date).toBe(true);
+        expect(note.finishDate).toBe("2000-04-01");
     });
 
     it("has description with default ''", function () {
@@ -48,15 +48,15 @@ describe("Note", function() {
     });
 
     it("create Note from json", function () {
-        var date1 = new Date();
-        var date2 = new Date();
+        var date1 = Date.UTC(2015,6,1);
+        var date2 = Date.UTC(2016,1,6);
         var note = new Note({ name: "one", done: true, creationDate: date1, finishDate: date2, description: "hallo", importance: 42 });
 
         expect(note.name).toBe("one");
         expect(note.description).toBe("hallo");
         expect(note.done).toBe(true);
-        expect(note.creationDate).toBe(date1);
-        expect(note.finishDate).toBe(date2);
+        expect(note.creationDate).toBe("2015-07-01");
+        expect(note.finishDate).toBe("2016-02-06");
         expect(note.importance).toBe(42);
     });
 

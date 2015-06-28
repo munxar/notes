@@ -5,6 +5,7 @@
 (function(exports) {
     var Property = exports.Property;
     var Note = exports.Note;
+    var noteService = exports.noteService;
 
     /**
      * Notes App business logic
@@ -77,18 +78,6 @@
     };
 
     /**
-     * get a node by id
-     * @param id note id
-     * @param cb callback(function(note){})
-     * @return {*|Note}
-     */
-    NotesApp.prototype.getNote = function(id, cb) {
-        id ? $.get("api/notes/" + id, function(data) { cb(new Note(data)); }) : cb(new Note());
-
-        //return this.notes.get().filter(function(note) { return note.id === id; })[0];
-    };
-
-    /**
      * append a new note and adds it to the notes array
      * @return {*|Note}
      */
@@ -108,7 +97,6 @@
         storage.setItem("filterIndex", JSON.stringify(this.filterIndex.get()));
         storage.setItem("showFinished", JSON.stringify(this.showFinished.get()));
         storage.setItem("style", JSON.stringify(this.style.get()));
-        storage.setItem("notes", JSON.stringify(this.notes.get()));
     };
 
     NotesApp.prototype.restore = function() {
@@ -130,12 +118,9 @@
         this.style.set(JSON.parse(storage.getItem("style")) || this.style.get());
 
         var self = this;
-        $.get("api/notes", function(data) {
-            self.notes.set(data.map(function(note) { return new Note(note); }));
+        noteService.getAll(function(notes) {
+            self.notes.set(notes);
         });
-
-        var notes = JSON.parse(storage.getItem("notes") || JSON.stringify(this.notes.get()))
-            .map( function(note) { return new Note(note); });
     };
 
     // exports

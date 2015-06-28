@@ -13,7 +13,6 @@
         args = args || {};
 
         this._id = args._id || undefined;
-        this.done = args.done || false;
         this.name = args.name || "";
         this.finished = args.finished || false;
         var creationDate = args.creationDate || new Date();
