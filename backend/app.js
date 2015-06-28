@@ -21,8 +21,10 @@ function main(err, connection) {
     var app = express();
 
     // serve static files
-    app.use(morgan("dev"));
     app.use(express.static(path.join(__dirname, config.webdir)));
+    // logger
+    app.use(morgan("dev"));
+    // json body parser
     app.use(bodyParser.json());
     // mount api
     app.use("/api", api);

@@ -16,10 +16,16 @@
         this.done = args.done || false;
         this.name = args.name || "";
         this.finished = args.finished || false;
-        this.creationDate = args.creationDate || new Date();
-        this.finishDate = args.finishDate || new Date();
+        var creationDate = args.creationDate || new Date();
+        var finishDate = args.finishDate || new Date();
+        this.creationDate = onlyDate(creationDate);
+        this.finishDate = onlyDate(finishDate);
         this.description = args.description || "";
         this.importance = args.importance || 0;
+    }
+
+    function onlyDate(date) {
+        return new Date(date).toJSON().split("T")[0];
     }
 
     // exports

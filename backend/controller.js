@@ -5,10 +5,6 @@ var repo = require("./repo");
 
 var ctrl = {};
 
-ctrl.info = function(req, res) {
-    res.json({});
-};
-
 ctrl.getAll = function(req, res) {
     repo.getAll().then(function(notes) {
         res.json(notes);
@@ -16,7 +12,6 @@ ctrl.getAll = function(req, res) {
 };
 
 ctrl.getNote = function(req, res, next) {
-
     repo.getOne(req.params.noteId).then(function(note) {
         if(note) {
             req.note = note;

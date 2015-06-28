@@ -38,6 +38,7 @@
             self.filters.set(self.filters.get());
             // filter list
             self.filter();
+            self.store();
         });
     }
 
@@ -69,8 +70,8 @@
      */
     NotesApp.prototype.getSortFunction = function() {
         return {
-            0: function(a, b) { return new Date(b.finishDate) - new Date(a.finishDate); },
-            1: function(a, b) { return new Date(b.creationDate) - new Date(a.creationDate);},
+            0: function(a, b) { return new Date(a.finishDate) - new Date(b.finishDate); },
+            1: function(a, b) { return new Date(a.creationDate) - new Date(b.creationDate);},
             2: function(a, b) { return b.importance - a.importance; }
         }[this.filterIndex.get()];
     };
@@ -82,7 +83,7 @@
      * @return {*|Note}
      */
     NotesApp.prototype.getNote = function(id, cb) {
-        id ? $.get("api/notes/" + id, cb) : cb(new Note());
+        id ? $.get("api/notes/" + id, function(data) { cb(new Note(data)); }) : cb(new Note());
 
         //return this.notes.get().filter(function(note) { return note.id === id; })[0];
     };
@@ -130,12 +131,11 @@
 
         var self = this;
         $.get("api/notes", function(data) {
-            self.notes.set(data);
+            self.notes.set(data.map(function(note) { return new Note(note); }));
         });
 
         var notes = JSON.parse(storage.getItem("notes") || JSON.stringify(this.notes.get()))
-            .map(function(note) { return new Note(note); });
-        //this.notes.set(notes);
+            .map( function(note) { return new Note(note); });
     };
 
     // exports

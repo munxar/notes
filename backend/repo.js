@@ -21,7 +21,7 @@ repo.delete = function(note) {
 };
 
 repo.create = function(note) {
-    return new Note(note).save();
+    return Note.create(note);
 };
 
 repo.update = function(note, data) {

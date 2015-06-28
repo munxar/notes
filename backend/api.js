@@ -7,7 +7,6 @@ var ctrl = require("./controller");
 
 var api = new express.Router();
 
-api.get("/", ctrl.info);
 api.get("/notes", ctrl.getAll);
 api.post("/notes", ctrl.create);
 api.param("noteId", ctrl.getNote);
